@@ -21,6 +21,14 @@ function App() {
           }
         />
       </Routes>
+      <Route
+  path="/jobs"
+  element={
+    <ProtectedRoute>
+      <Jobs />
+    </ProtectedRoute>
+  }
+/>
     </BrowserRouter>
   );
 }
