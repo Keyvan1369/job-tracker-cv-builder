@@ -1,11 +1,13 @@
+import { useAuth } from "../context/AuthContext";
+
 export default function Dashboard() {
+  const { logout } = useAuth();
+
   return (
-    <div style={{ padding: 20 }}>
+    <div>
       <h1>Dashboard</h1>
 
-      <p>Welcome </p>
-
-      <p>Your Job Tracker and CV Builder will appear here soon.</p>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
