@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Jobs from "./pages/Jobs";
 
 function App() {
   return (
@@ -20,15 +21,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/jobs"
+          element={
+            <ProtectedRoute>
+              <Jobs />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-      <Route
-  path="/jobs"
-  element={
-    <ProtectedRoute>
-      <Jobs />
-    </ProtectedRoute>
-  }
-/>
     </BrowserRouter>
   );
 }
