@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Jobs from "./pages/Jobs";
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -12,6 +13,27 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+  path="/dashboard"
+  element={
+    <ProtectedRoute>
+      <Layout>
+        <Dashboard />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/jobs"
+  element={
+    <ProtectedRoute>
+      <Layout>
+        <Jobs />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/dashboard"
