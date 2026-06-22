@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import "./Jobs.css";
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -10,59 +11,113 @@ export default function Jobs() {
     status: "Applied",
   });
 
-  // GET JOBS
+  const [filter, setFilter] = useState("All");
+
+
   const fetchJobs = async () => {
-    const res = await api.get("/jobs");
-    setJobs(res.data);
+    try {
+      const res = await api.get("/jobs");
+      setJobs(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchJobs();
   }, []);
 
-  // CREATE JOB
+
   const addJob = async (e) => {
     e.preventDefault();
 
-    await api.post("/jobs", form);
+    try {
+      await api.post("/jobs", form);
 
-    setForm({ company: "", title: "", status: "Applied" });
+      setForm({
+        company: "",
+        title: "",
+        status: "Applied",
+      });
 
-    fetchJobs();
+      fetchJobs();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // DELETE JOB
+
   const deleteJob = async (id) => {
-    await api.delete(`/jobs/${id}`);
-    fetchJobs();
+    try {
+      await api.delete(`/jobs/${id}`);
+
+      setJobs(jobs.filter((job) => job.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  
+  const updateStatus = async (id, status) => {
+    try {
+      await api.put(`/jobs/${id}`, {
+        status,
+      });
+
+      fetchJobs();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const filteredJobs =
+    filter === "All"
+      ? jobs
+      : jobs.filter((job) => job.status === filter);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Job Tracker</h1>
+    <div className="jobs-container">
 
-      {/* FORM */}
-      <form onSubmit={addJob}>
+      <div className="jobs-header">
+        <h1>Job Tracker</h1>
+        <p>Track all your job applications</p>
+      </div>
+
+
+
+      <form className="job-form" onSubmit={addJob}>
+
         <input
+          type="text"
           placeholder="Company"
           value={form.company}
           onChange={(e) =>
-            setForm({ ...form, company: e.target.value })
+            setForm({
+              ...form,
+              company: e.target.value,
+            })
           }
         />
 
         <input
-          placeholder="Title"
+          type="text"
+          placeholder="Job Title"
           value={form.title}
           onChange={(e) =>
-            setForm({ ...form, title: e.target.value })
+            setForm({
+              ...form,
+              title: e.target.value,
+            })
           }
         />
 
         <select
           value={form.status}
           onChange={(e) =>
-            setForm({ ...form, status: e.target.value })
+            setForm({
+              ...form,
+              status: e.target.value,
+            })
           }
         >
           <option>Applied</option>
@@ -71,30 +126,91 @@ export default function Jobs() {
           <option>Offer</option>
         </select>
 
-        <button type="submit">Add Job</button>
+        <button type="submit">
+          Add Job
+        </button>
+
       </form>
 
-      <hr />
 
-      {/* LIST */}
-      {jobs.map((job) => (
-        <div
-          key={job.id}
-          style={{
-            border: "1px solid gray",
-            margin: 10,
-            padding: 10,
-          }}
+
+      <div className="filter-box">
+
+        <label>Filter:</label>
+
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
         >
-          <h3>{job.company}</h3>
-          <p>{job.title}</p>
-          <p>Status: {job.status}</p>
+          <option>All</option>
+          <option>Applied</option>
+          <option>Interview</option>
+          <option>Rejected</option>
+          <option>Offer</option>
+        </select>
 
-          <button onClick={() => deleteJob(job.id)}>
-            Delete
-          </button>
-        </div>
-      ))}
+      </div>
+
+
+
+      <div className="jobs-list">
+
+        {filteredJobs.length === 0 ? (
+
+          <p>No jobs found.</p>
+
+        ) : (
+
+          filteredJobs.map((job) => (
+
+            <div className="job-card" key={job.id}>
+
+              <h2>{job.company}</h2>
+
+              <p className="job-title">
+                {job.title}
+              </p>
+
+              <span
+                className={`status ${job.status.toLowerCase()}`}
+              >
+                {job.status}
+              </span>
+
+              <div className="actions">
+
+                <select
+                  value={job.status}
+                  onChange={(e) =>
+                    updateStatus(
+                      job.id,
+                      e.target.value
+                    )
+                  }
+                >
+                  <option>Applied</option>
+                  <option>Interview</option>
+                  <option>Rejected</option>
+                  <option>Offer</option>
+                </select>
+
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteJob(job.id)}
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          ))
+
+        )}
+
+      </div>
+
     </div>
   );
 }
