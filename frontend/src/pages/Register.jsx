@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "../styles/Register.css";
 
 export default function Register() {
   const { login } = useAuth();
@@ -13,29 +14,55 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const res = await api.post("/auth/register", {
-      name,
-      email,
-      password,
-    });
-
-    login(res.data);
-
-    navigate("/dashboard");
+    try {
+      const res = await api.post("/auth/register", { name, email, password });
+      login(res.data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className="register-container">
+      <div className="register-card">
+        <h2>Create Account</h2>
+        <p className="register-subtitle">Get started with your free account</p>
 
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
-        <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Full Name"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
-        <button>Register</button>
-      </form>
+          <div className="input-group">
+            <input
+              type="email"
+              placeholder="Email address"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <input
+              placeholder="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="button-group">
+            <button type="submit" className="register-button">Register</button>
+            <button type="button" className="back-button" onClick={() => navigate(-1)}>&larr;Back</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
