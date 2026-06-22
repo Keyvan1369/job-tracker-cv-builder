@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import "./Jobs.css";
+import "../styles/Jobs.css";
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -57,7 +57,7 @@ export default function Jobs() {
     }
   };
 
-  
+
   const updateStatus = async (id, status) => {
     try {
       await api.put(`/jobs/${id}`, {
