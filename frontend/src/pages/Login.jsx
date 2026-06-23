@@ -1,59 +1,243 @@
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+
 import "../styles/Login.css";
 
 export default function Login() {
-  const { login } = useAuth();
+
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
+
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
 
+  const [error, setError] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+
   const handleLogin = async (e) => {
+
     e.preventDefault();
+
+    setError("");
+
+    setLoading(true);
+
+
     try {
-      const res = await api.post("/auth/login", { email, password });
+
+      const res = await api.post(
+        "/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+
       login(res.data);
+
+
       navigate("/dashboard");
-    } catch (error) {
-      console.error(error);
+
     }
+
+    catch (err) {
+
+      console.log(err);
+
+      setError(
+
+        err.response?.data?.message ||
+
+        "Login failed"
+
+      );
+
+    }
+
+    finally {
+
+      setLoading(false);
+
+    }
+
   };
 
+
   return (
+
     <div className="login-container">
+
       <div className="login-card">
-        <button type="button" className="back-button" onClick={() => navigate(-1)}>
-          &larr; Back
+
+        <button
+
+          className="back-button"
+
+          onClick={() => navigate("/")}
+
+        >
+
+          ← Back
+
         </button>
 
-        <h2>Welcome Back</h2>
-        <p className="login-subtitle">Please enter your details to sign in</p>
 
-        <form onSubmit={handleLogin} className="login-form">
+        <h1>
+
+          Welcome Back 
+
+        </h1>
+
+
+        <p className="login-subtitle">
+
+          Sign in to continue tracking
+
+          your job applications.
+
+        </p>
+
+
+        <form
+
+          className="login-form"
+
+          onSubmit={handleLogin}
+
+        >
+
+
           <div className="input-group">
+
+            <label>
+
+              Email
+
+            </label>
+
             <input
+
               type="email"
-              placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
+
+              placeholder="Enter your email"
+
+              value={email}
+
+              onChange={(e) =>
+
+                setEmail(e.target.value)
+
+              }
+
               required
+
             />
+
           </div>
+
 
           <div className="input-group">
+
+            <label>
+
+              Password
+
+            </label>
+
             <input
-              placeholder="Password"
+
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+
+              placeholder="Enter your password"
+
+              value={password}
+
+              onChange={(e) =>
+
+                setPassword(e.target.value)
+
+              }
+
               required
+
             />
+
           </div>
 
-          <button type="submit" className="login-button">Sign In</button>
+
+          {
+
+            error &&
+
+            (
+
+              <p className="error-message">
+
+                {error}
+
+              </p>
+
+            )
+
+          }
+
+
+          <button
+
+            className="login-button"
+
+            type="submit"
+
+            disabled={loading}
+
+          >
+
+            {
+
+              loading
+
+                ?
+
+                "Signing in..."
+
+                :
+
+                "Sign In"
+
+            }
+
+          </button>
+
+
         </form>
+
+
+        <div className="login-footer">
+
+          Don't have an account?
+
+          <Link to="/register">
+
+            Register
+
+          </Link>
+
+        </div>
+
+
       </div>
+
     </div>
+
   );
+
 }

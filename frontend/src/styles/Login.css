@@ -121,3 +121,11 @@
 .back-button:hover {
   color: var(--primary-color);
 }
+.error-message {
+
+  color: #e74c3c;
+
+  margin-bottom: 15px;
+
+  text-align: center;
+}
