@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Jobs from "./pages/Jobs";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
+import CVBuilder from "./pages/CVBuilder";
 
 function App() {
   return (
@@ -15,6 +16,14 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+  path="/cv-builder"
+  element={
+    <ProtectedRoute>
+      <CVBuilder />
+    </ProtectedRoute>
+  }
+/>
         <Route
   path="/dashboard"
   element={
