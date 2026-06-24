@@ -1,43 +1,66 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
+  const cvRef = useRef();
 
   const [cvData, setCvData] = useState({
-
     fullName: "",
-
     email: "",
-
     phone: "",
-
     location: "",
-
     summary: "",
-
     skills: "",
-
     experience: "",
-
     education: "",
-
   });
 
   const handleChange = (e) => {
-
     setCvData({
-
       ...cvData,
-
       [e.target.name]: e.target.value,
+    });
+  };
 
+  const downloadPDF = async () => {
+    const element = cvRef.current;
+
+    const canvas = await html2canvas(element, {
+      scale: 2,
     });
 
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF(
+      "p",
+      "mm",
+      "a4"
+    );
+
+    const pdfWidth =
+      pdf.internal.pageSize.getWidth();
+
+    const pdfHeight =
+      (canvas.height * pdfWidth) /
+      canvas.width;
+
+    pdf.addImage(
+      imgData,
+      "PNG",
+      0,
+      0,
+      pdfWidth,
+      pdfHeight
+    );
+
+    pdf.save("resume.pdf");
   };
 
   return (
-
     <div className="cv-container">
 
       <div className="cv-form">
@@ -49,6 +72,7 @@ export default function CVBuilder() {
         </p>
 
         <input
+          type="text"
           name="fullName"
           placeholder="Full Name"
           value={cvData.fullName}
@@ -56,6 +80,7 @@ export default function CVBuilder() {
         />
 
         <input
+          type="email"
           name="email"
           placeholder="Email"
           value={cvData.email}
@@ -63,13 +88,15 @@ export default function CVBuilder() {
         />
 
         <input
+          type="text"
           name="phone"
-          placeholder="Phone"
+          placeholder="Phone Number"
           value={cvData.phone}
           onChange={handleChange}
         />
 
         <input
+          type="text"
           name="location"
           placeholder="Location"
           value={cvData.location}
@@ -85,7 +112,7 @@ export default function CVBuilder() {
 
         <textarea
           name="skills"
-          placeholder="Skills (comma separated)"
+          placeholder="Skills (React, Node.js, MongoDB...)"
           value={cvData.skills}
           onChange={handleChange}
         />
@@ -104,69 +131,74 @@ export default function CVBuilder() {
           onChange={handleChange}
         />
 
+        <button
+          className="download-btn"
+          onClick={downloadPDF}
+        >
+          Download PDF
+        </button>
+
       </div>
 
-      <div className="cv-preview">
+      <div
+        className="cv-preview"
+        ref={cvRef}
+      >
 
         <h1>
-
           {cvData.fullName || "Your Name"}
-
         </h1>
 
         <p>
-
           {cvData.email}
-
           {cvData.email && " | "}
-
           {cvData.phone}
-
         </p>
 
         <p>
-
           {cvData.location}
-
         </p>
 
         <hr />
 
-        <h2>Summary</h2>
+        <section>
+          <h2>Professional Summary</h2>
 
-        <p>
+          <p>
+            {cvData.summary ||
+              "Write a short summary about yourself."}
+          </p>
+        </section>
 
-          {cvData.summary}
+        <section>
+          <h2>Skills</h2>
 
-        </p>
+          <p>
+            {cvData.skills ||
+              "React, JavaScript, Node.js"}
+          </p>
+        </section>
 
-        <h2>Skills</h2>
+        <section>
+          <h2>Experience</h2>
 
-        <p>
+          <p>
+            {cvData.experience ||
+              "Describe your work experience."}
+          </p>
+        </section>
 
-          {cvData.skills}
+        <section>
+          <h2>Education</h2>
 
-        </p>
-
-        <h2>Experience</h2>
-
-        <p>
-
-          {cvData.experience}
-
-        </p>
-
-        <h2>Education</h2>
-
-        <p>
-
-          {cvData.education}
-
-        </p>
+          <p>
+            {cvData.education ||
+              "Describe your education."}
+          </p>
+        </section>
 
       </div>
 
     </div>
-
   );
 }
