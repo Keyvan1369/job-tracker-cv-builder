@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import api from "../services/api";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -51,9 +52,37 @@ export default function CVBuilder() {
     pdf.save(`${cvData.fullName || "resume"}.pdf`);
   };
 
+  const saveCV = async () => {
+  try {
+    const res = await api.post(
+      "/cvs",
+      cvData
+    );
+
+    console.log(res.data);
+
+    alert("CV saved successfully!");
+  } catch (error) {
+
+    console.log("FULL ERROR:", error);
+
+    console.log(
+      "RESPONSE:",
+      error.response
+    );
+
+    console.log(
+      "DATA:",
+      error.response?.data
+    );
+
+    alert("Failed to save CV");
+  }
+};
+
   return (
     <div className="cv-container">
-      {/* بخش فرم ورودی */}
+
       <div className="cv-form">
         <h1>CV Builder</h1>
         <p>Create your professional resume</p>
@@ -161,9 +190,12 @@ export default function CVBuilder() {
         <button className="download-btn" onClick={downloadPDF}>
           <span>Download PDF</span>
         </button>
+        <button className="save-btn" onClick={saveCV}>
+        Save CV
+        </button>
       </div>
 
-      {/* بخش پیش‌نمایش رزومه */}
+
       <div className="cv-preview" ref={cvRef}>
         <h1>{cvData.fullName || "Your Name"}</h1>
         <p>
