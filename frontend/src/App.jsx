@@ -10,6 +10,7 @@ import Landing from "./pages/Landing";
 import CVBuilder from "./pages/CVBuilder";
 import MyCVs from "./pages/MyCVs";
 
+
 function App() {
   return (
     <BrowserRouter>

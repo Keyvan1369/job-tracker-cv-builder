@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
@@ -77,7 +78,7 @@ export default function Dashboard() {
         <div className="welcome-section">
 
           <h1>
-            Hello {user?.name || "User"} 👋
+            Hello {user?.name || "User"}
           </h1>
 
           <p>
@@ -144,6 +145,10 @@ export default function Dashboard() {
                 >
                   CV Builder
                 </button>
+                <button onClick={() => navigate('/my-cvs')}>
+                  My CVs
+                </button>
+
 
               </div>
 
