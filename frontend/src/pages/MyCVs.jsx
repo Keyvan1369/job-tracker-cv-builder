@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-
+import "../styles/MyCVs.css"
 export default function MyCVs() {
   const [cvs, setCvs] = useState([]);
 
