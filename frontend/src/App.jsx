@@ -8,6 +8,7 @@ import Jobs from "./pages/Jobs";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import CVBuilder from "./pages/CVBuilder";
+import MyCVs from "./pages/MyCVs";
 
 function App() {
   return (
@@ -21,6 +22,14 @@ path="/cv-builder"
   element={
     <ProtectedRoute>
       <CVBuilder />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/my-cvs"
+  element={
+    <ProtectedRoute>
+      <MyCVs />
     </ProtectedRoute>
   }
 />
@@ -64,7 +73,9 @@ path="/cv-builder"
           }
         />
       </Routes>
+
     </BrowserRouter>
+
   );
 }
 
