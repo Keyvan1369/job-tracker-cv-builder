@@ -1,13 +1,10 @@
 import CV from "../models/cv.model.js";
 
-export const createCV = async (
-  req,
-  res
-) => {
+export const createCV = async (req, res) => {
   try {
     const cv = await CV.create({
       ...req.body,
-      user: req.user.id,
+      user: req.user.userId,
     });
 
     res.status(201).json(cv);
@@ -18,13 +15,10 @@ export const createCV = async (
   }
 };
 
-export const getCVs = async (
-  req,
-  res
-) => {
+export const getCVs = async (req, res) => {
   try {
     const cvs = await CV.find({
-      user: req.user.id,
+      user: req.user.userId,
     });
 
     res.json(cvs);
