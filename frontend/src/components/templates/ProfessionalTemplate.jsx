@@ -1,3 +1,6 @@
+import "../../styles/template/ProfessionalTemplate.css"
+
+
 export default function ProfessionalTemplate({
   cvData,
 }) {
