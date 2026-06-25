@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
-import "../styles/CVBuilder.css";
 import ModernTemplate from "../components/templates/ModernTemplate";
 import ProfessionalTemplate from "../components/templates/ProfessionalTemplate";
 import MinimalTemplate from "../components/templates/MinimalTemplate";
 import CreativeTemplate from "../components/templates/CreativeTemplate";
+import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
   const cvRef = useRef();
@@ -85,7 +85,7 @@ export default function CVBuilder() {
 
   return (
     <div className="cv-container">
-      {/* FORM SECTION */}
+      
       <div className="cv-form">
         <h1>CV Builder</h1>
         <p>Create your professional resume</p>
@@ -200,7 +200,6 @@ export default function CVBuilder() {
         </div>
       </div>
 
-      {/* PREVIEW & SELECTOR SECTION */}
       <div className="cv-preview-sidebar">
         <div className="template-selector">
           <label>Select Template: </label>
@@ -212,7 +211,7 @@ export default function CVBuilder() {
           </select>
         </div>
 
-        {/* این بخش همان چیزی است که به PDF تبدیل می‌شود */}
+
         <div className="cv-preview" ref={cvRef}>
           {renderTemplate()}
         </div>

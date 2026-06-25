@@ -1,6 +1,8 @@
 :root {
   --primary: #4f46e5;
   --primary-hover: #4338ca;
+  --success: #16a34a;
+  --success-hover: #15803d;
   --bg-main: #f8fafc;
   --bg-card: #ffffff;
   --text-main: #1e293b;
@@ -20,9 +22,12 @@
   max-width: 1400px;
   margin: 0 auto;
   font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  min-height: 100vh;
 }
 
-.cv-form, .cv-preview {
+/* بخش فرم ورودی‌ها */
+.cv-form {
   background: var(--bg-card);
   padding: 32px;
   border-radius: var(--radius-lg);
@@ -32,7 +37,7 @@
 }
 
 .cv-form h1 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 8px;
@@ -42,6 +47,16 @@
   color: var(--text-muted);
   font-size: 14px;
   margin-bottom: 24px;
+}
+
+.cv-form h2 {
+  font-size: 18px;
+  color: var(--text-main);
+  margin-top: 28px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 6px;
 }
 
 .cv-form input,
@@ -72,131 +87,75 @@
 }
 
 .cv-form textarea {
-  min-height: 140px;
+  min-height: 120px;
   resize: vertical;
 }
 
+/* باکس‌های تکرارشونده تجربه و تحصیلات */
 .experience-box {
   border: 1px solid var(--border-color);
   padding: 20px;
   border-radius: var(--radius-md);
   margin-bottom: 20px;
-  background: #fafafa;
+  background: #f8fafc;
 }
 
-.download-btn {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
-  color: white;
-  border: none;
-  padding: 16px;
+/* سایدبار سمت راست (انتخاب قالب + پیش‌نویس) */
+.cv-preview-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 40px; /* قفل شدن سایدبار هنگام اسکرول */
+  height: fit-content;
+}
+
+/* استایل بخش انتخاب قالب */
+.template-selector {
+  background: var(--bg-card);
+  padding: 16px 24px;
   border-radius: var(--radius-md);
-  cursor: pointer;
-  margin-bottom: 24px;
-  font-size: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.template-selector label {
   font-weight: 600;
-  letter-spacing: 0.5px;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.template-selector select {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: #f8fafc;
+  color: var(--text-main);
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
 }
 
-.download-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
+.template-selector select:focus {
+  border-color: var(--primary);
 }
 
-.download-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.45);
-}
-
-.download-btn:hover::before {
-  opacity: 1;
-}
-
-.download-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
-}
-
-.download-btn * {
-  position: relative;
-  z-index: 2;
-}
-
+/* بخش پیش‌نمایش نهایی */
 .cv-preview {
   background: var(--bg-card);
-  color: #334155;
-}
-
-.cv-preview h1 {
-  font-size: 28px;
-  color: var(--text-main);
-  font-weight: 800;
-  margin-bottom: 6px;
-  letter-spacing: -0.5px;
-}
-
-.cv-preview h2 {
-  font-size: 18px;
-  color: var(--primary);
-  font-weight: 600;
-  margin-top: 24px;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.cv-preview hr {
-  border: 0;
-  border-top: 2px solid var(--border-color);
-  margin: 16px 0;
-}
-
-.skills-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.skill-tag {
-  background: #f1f5f9;
-  color: #475569;
-  padding: 6px 14px;
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  transition: var(--transition);
-  cursor: pointer;
+  color: #334155;
+  min-height: 600px; /* ایجاد یک اندازه اولیه استاندارد */
 }
 
-.skill-tag:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
-}
-
-@media (max-width: 1024px) {
-  .cv-container {
-    grid-template-columns: 1fr;
-    padding: 20px;
-    gap: 24px;
-  }
-}
+/* دکمه‌های افزودن آیتم جدید */
 .add-btn {
   width: 100%;
   background: transparent;
@@ -216,13 +175,69 @@
   border-color: var(--primary);
   color: var(--primary-hover);
 }
-.save-btn {
-  width: 100%;
-  margin-top: 10px;
-  background: #16a34a;
-  color: white;
+
+/* پکیج دکمه‌های عملیاتی پایین فرم */
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.download-btn, .save-btn {
+  flex: 1;
   border: none;
   padding: 14px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-btn {
+  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+  filter: brightness(1.05);
+}
+
+.save-btn {
+  background: var(--success);
+  color: white;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2);
+}
+
+.save-btn:hover {
+  background: var(--success-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+}
+
+.download-btn:active, .save-btn:active {
+  transform: translateY(1px);
+}
+
+/* ریسپانسیو در تبلت و موبایل */
+@media (max-width: 1024px) {
+  .cv-container {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .cv-preview-sidebar {
+    position: static;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
 }
