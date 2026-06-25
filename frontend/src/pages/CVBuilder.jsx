@@ -3,6 +3,10 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
 import "../styles/CVBuilder.css";
+import ModernTemplate from "../components/templates/ModernTemplate";
+import ProfessionalTemplate from "../components/templates/ProfessionalTemplate";
+import MinimalTemplate from "../components/templates/MinimalTemplate";
+import CreativeTemplate from "../components/templates/CreativeTemplate";
 
 export default function CVBuilder() {
   const cvRef = useRef();
@@ -17,6 +21,7 @@ export default function CVBuilder() {
     experiences: [{ company: "", position: "", period: "", description: "" }],
     educations: [{ school: "", degree: "", year: "" }],
   });
+  const [template, setTemplate] = useState("modern");
 
   const handleChange = (e) => {
     setCvData({
@@ -53,36 +58,34 @@ export default function CVBuilder() {
   };
 
   const saveCV = async () => {
-  try {
-    const res = await api.post(
-      "/cvs",
-      cvData
-    );
+    try {
+      const res = await api.post("/cvs", cvData);
+      console.log(res.data);
+      alert("CV saved successfully!");
+    } catch (error) {
+      console.log("FULL ERROR:", error);
+      console.log("RESPONSE:", error.response);
+      console.log("DATA:", error.response?.data);
+      alert("Failed to save CV");
+    }
+  };
 
-    console.log(res.data);
-
-    alert("CV saved successfully!");
-  } catch (error) {
-
-    console.log("FULL ERROR:", error);
-
-    console.log(
-      "RESPONSE:",
-      error.response
-    );
-
-    console.log(
-      "DATA:",
-      error.response?.data
-    );
-
-    alert("Failed to save CV");
-  }
-};
+  const renderTemplate = () => {
+    switch (template) {
+      case "professional":
+        return <ProfessionalTemplate cvData={cvData} />;
+      case "minimal":
+        return <MinimalTemplate cvData={cvData} />;
+      case "creative":
+        return <CreativeTemplate cvData={cvData} />;
+      default:
+        return <ModernTemplate cvData={cvData} />;
+    }
+  };
 
   return (
     <div className="cv-container">
-
+      {/* FORM SECTION */}
       <div className="cv-form">
         <h1>CV Builder</h1>
         <p>Create your professional resume</p>
@@ -187,64 +190,32 @@ export default function CVBuilder() {
           + Add Education
         </button>
 
-        <button className="download-btn" onClick={downloadPDF}>
-          <span>Download PDF</span>
-        </button>
-        <button className="save-btn" onClick={saveCV}>
-        Save CV
-        </button>
+        <div className="action-buttons" style={{ marginTop: "20px" }}>
+          <button className="download-btn" onClick={downloadPDF}>
+            <span>Download PDF</span>
+          </button>
+          <button className="save-btn" onClick={saveCV}>
+            Save CV
+          </button>
+        </div>
       </div>
 
+      {/* PREVIEW & SELECTOR SECTION */}
+      <div className="cv-preview-sidebar">
+        <div className="template-selector">
+          <label>Select Template: </label>
+          <select value={template} onChange={(e) => setTemplate(e.target.value)}>
+            <option value="modern">Modern</option>
+            <option value="professional">Professional</option>
+            <option value="minimal">Minimal</option>
+            <option value="creative">Creative</option>
+          </select>
+        </div>
 
-      <div className="cv-preview" ref={cvRef}>
-        <h1>{cvData.fullName || "Your Name"}</h1>
-        <p>
-          {cvData.email}
-          {cvData.email && cvData.phone && " | "}
-          {cvData.phone}
-        </p>
-        <p>{cvData.location}</p>
-
-        {cvData.summary && <><hr /><h2>Summary</h2><p>{cvData.summary}</p></>}
-
-        {cvData.skills && (
-          <>
-            <h2>Skills</h2>
-            <div className="skills-preview">
-              {cvData.skills
-                .split(",")
-                .filter(Boolean)
-                .map((skill, index) => (
-                  <span key={index} className="skill-tag">
-                    {skill.trim()}
-                  </span>
-                ))}
-            </div>
-          </>
-        )}
-
-        {cvData.experiences.some(e => e.position || e.company) && <h2>Experience</h2>}
-        {cvData.experiences.map((exp, index) => (
-          (exp.position || exp.company) && (
-            <div key={index} className="preview-item">
-              <h3>{exp.position}</h3>
-              <strong>{exp.company}</strong>
-              <span className="period-text">{exp.period}</span>
-              <p>{exp.description}</p>
-            </div>
-          )
-        ))}
-
-        {cvData.educations.some(e => e.degree || e.school) && <h2>Education</h2>}
-        {cvData.educations.map((edu, index) => (
-          (edu.degree || edu.school) && (
-            <div key={index} className="preview-item">
-              <h3>{edu.degree}</h3>
-              <strong>{edu.school}</strong>
-              <span className="period-text">{edu.year}</span>
-            </div>
-          )
-        ))}
+        {/* این بخش همان چیزی است که به PDF تبدیل می‌شود */}
+        <div className="cv-preview" ref={cvRef}>
+          {renderTemplate()}
+        </div>
       </div>
     </div>
   );
