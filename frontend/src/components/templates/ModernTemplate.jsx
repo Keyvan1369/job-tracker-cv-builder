@@ -1,7 +1,11 @@
+import "../../styles/template/ModernTemplate.css"
+
+
 export default function ModernTemplate({
   cvData,
 }) {
   return (
+    <div className="modern-template">
     <div>
 
       <h1>
@@ -33,6 +37,7 @@ export default function ModernTemplate({
           </span>
         ))}
 
+    </div>
     </div>
   );
 }
