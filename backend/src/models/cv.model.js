@@ -7,6 +7,10 @@ const cvSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    template: {
+  type: String,
+  default: "modern",
+},
 
     fullName: String,
     email: String,
