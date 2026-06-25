@@ -22,7 +22,10 @@ function App() {
 path="/cv-builder"
   element={
     <ProtectedRoute>
-      <CVBuilder />
+      <Layout>
+        <CVBuilder />
+      </Layout>
+
     </ProtectedRoute>
   }
 />
@@ -30,7 +33,10 @@ path="/cv-builder"
   path="/my-cvs"
   element={
     <ProtectedRoute>
+      <Layout>
       <MyCVs />
+      </Layout>
+
     </ProtectedRoute>
   }
 />
