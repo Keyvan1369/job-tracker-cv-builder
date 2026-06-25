@@ -1,0 +1,57 @@
+.minimal-template {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333333;
+  line-height: 1.6;
+  direction: rtl;
+}
+
+.minimal-template h1 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #111111;
+}
+
+.minimal-template p {
+  font-size: 0.95rem;
+  color: #666666;
+  margin: 4px 0;
+}
+
+.minimal-template h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 40px 0 20px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #222222;
+}
+
+.minimal-template div {
+  margin-bottom: 20px;
+}
+
+.minimal-template strong {
+  font-size: 1.1rem;
+  color: #111111;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.minimal-template div p {
+  font-size: 1rem;
+  color: #444444;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .minimal-template {
+    margin: 20px;
+    padding: 10px;
+  }
+}

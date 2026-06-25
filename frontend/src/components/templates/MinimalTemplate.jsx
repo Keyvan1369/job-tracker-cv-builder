@@ -1,3 +1,5 @@
+import "../../styles/template/MinimalTemplate.css"
+
 export default function MinimalTemplate({
   cvData,
 }) {
