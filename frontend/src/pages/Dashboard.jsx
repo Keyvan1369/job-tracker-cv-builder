@@ -58,7 +58,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
 
-      <header className="dashboard-header">
+     {/* <header className="dashboard-header">
 
         <div className="logo">
           JobTrack
@@ -71,7 +71,7 @@ export default function Dashboard() {
           Logout
         </button>
 
-      </header>
+      </header> */}
 
       <div className="dashboard-content">
 
