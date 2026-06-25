@@ -1,0 +1,42 @@
+.layout-container {
+  font-family: sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* برای قرارگیری عمودی و تراز شدن المان‌ها */
+  padding: 15px;
+  background-color: #111;
+  color: white;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none; /* حذف خط زیر لینک‌ها */
+  margin-right: 15px;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.8; /* افکت ساده هنگام نگه داشتن موس روی لینک */
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #ff7875;
+}
+
+.content-container {
+  padding: 20px;
+}
