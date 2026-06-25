@@ -1,3 +1,5 @@
+import "../../styles/template/CreativeTemplate.css"
+
 export default function CreativeTemplate({
   cvData,
 }) {
