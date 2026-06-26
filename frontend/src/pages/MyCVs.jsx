@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 import "../styles/MyCVs.css";
 
@@ -56,9 +57,14 @@ export default function MyCVs() {
                  Template:
                 {cv.template}
                 </p>
-                <button className="delete-btn" onClick={() =>handleDelete(cv._id)}>
-                  Delete
-                </button>
+                <div className="cv-actions">
+                  <button className="delete-btn" onClick={() =>handleDelete(cv._id)}>
+                     Delete
+                  </button>
+                  <Link to={`/cv-builder/${cv._id}`}>
+                    <button className="edit-btn">Edit</button>
+                  </Link>
+                </div>
           </div>
         ))
       )}

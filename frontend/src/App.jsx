@@ -19,7 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route
-path="/cv-builder"
+path="/cv-builder/:id?"
   element={
     <ProtectedRoute>
       <Layout>

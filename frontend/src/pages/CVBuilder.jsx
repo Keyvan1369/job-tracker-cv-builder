@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect  } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
@@ -6,10 +6,13 @@ import ModernTemplate from "../components/templates/ModernTemplate";
 import ProfessionalTemplate from "../components/templates/ProfessionalTemplate";
 import MinimalTemplate from "../components/templates/MinimalTemplate";
 import CreativeTemplate from "../components/templates/CreativeTemplate";
+import {useParams} from "react-router-dom";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
   const cvRef = useRef();
+
+  
 
   const [cvData, setCvData] = useState({
     fullName: "",
@@ -85,6 +88,41 @@ export default function CVBuilder() {
         return <ModernTemplate cvData={cvData} />;
     }
   };
+  const { id } = useParams();
+  const fetchCV = async () => {
+
+  try {
+
+    const res =
+      await api.get(`/cvs/${id}`);
+
+    setCvData({
+      fullName: res.data.fullName,
+      email: res.data.email,
+      phone: res.data.phone,
+      location: res.data.location,
+      summary: res.data.summary,
+      skills: res.data.skills,
+      experiences: res.data.experiences,
+      educations: res.data.educations,
+    });
+
+    if (res.data.template) {
+      setTemplate(res.data.template);
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+useEffect(() => {
+  if (id) {
+    fetchCV();
+  }
+}, [id]);
 
   return (
     <div className="cv-container">
