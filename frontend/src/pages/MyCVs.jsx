@@ -15,6 +15,19 @@ export default function MyCVs() {
       console.log(error);
     }
   };
+  const handleDelete = async (
+  id
+) => {
+  try {
+    await api.delete(
+      `/cvs/${id}`
+    );
+
+    fetchCVs();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   useEffect(() => {
     fetchCVs();
@@ -28,6 +41,7 @@ export default function MyCVs() {
           ← Back
         </button>
         <h1>My CVs</h1>
+
       </div>
 
       {cvs.length === 0 ? (
@@ -42,6 +56,9 @@ export default function MyCVs() {
                  Template:
                 {cv.template}
                 </p>
+                <button onClick={() =>handleDelete(cv._id)}>
+                  Delete
+                </button>
           </div>
         ))
       )}
