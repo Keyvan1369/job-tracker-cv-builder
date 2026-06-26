@@ -13,7 +13,6 @@ export default function Jobs() {
 
   const [filter, setFilter] = useState("All");
 
-
   const fetchJobs = async () => {
     try {
       const res = await api.get("/jobs");
@@ -27,43 +26,35 @@ export default function Jobs() {
     fetchJobs();
   }, []);
 
-
   const addJob = async (e) => {
     e.preventDefault();
-
     try {
       await api.post("/jobs", form);
-
       setForm({
         company: "",
         title: "",
         status: "Applied",
       });
-
       fetchJobs();
     } catch (error) {
       console.log(error);
     }
   };
 
-
   const deleteJob = async (id) => {
     try {
       await api.delete(`/jobs/${id}`);
-
-      setJobs(jobs.filter((job) => job.id !== id));
+      setJobs(jobs.filter((job) => job._id !== id)); // اصلاح شد: _id
     } catch (error) {
       console.log(error);
     }
   };
-
 
   const updateStatus = async (id, status) => {
     try {
       await api.put(`/jobs/${id}`, {
         status,
       });
-
       fetchJobs();
     } catch (error) {
       console.log(error);
@@ -77,16 +68,12 @@ export default function Jobs() {
 
   return (
     <div className="jobs-container">
-
       <div className="jobs-header">
         <h1>Job Tracker</h1>
         <p>Track all your job applications</p>
       </div>
 
-
-
       <form className="job-form" onSubmit={addJob}>
-
         <input
           type="text"
           placeholder="Company"
@@ -126,18 +113,11 @@ export default function Jobs() {
           <option>Offer</option>
         </select>
 
-        <button type="submit">
-          Add Job
-        </button>
-
+        <button type="submit">Add Job</button>
       </form>
 
-
-
       <div className="filter-box">
-
         <label>Filter:</label>
-
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
@@ -148,44 +128,27 @@ export default function Jobs() {
           <option>Rejected</option>
           <option>Offer</option>
         </select>
-
       </div>
 
-
-
       <div className="jobs-list">
-
         {filteredJobs.length === 0 ? (
-
           <p>No jobs found.</p>
-
         ) : (
-
           filteredJobs.map((job) => (
-
-            <div className="job-card" key={job.id}>
-
+            <div className="job-card" key={job._id}> {/* اصلاح شد: _id */}
               <h2>{job.company}</h2>
 
-              <p className="job-title">
-                {job.title}
-              </p>
+              <p className="job-title">{job.title}</p>
 
-              <span
-                className={`status ${job.status.toLowerCase()}`}
-              >
+              <span className={`status ${job.status.toLowerCase()}`}>
                 {job.status}
               </span>
 
               <div className="actions">
-
                 <select
                   value={job.status}
                   onChange={(e) =>
-                    updateStatus(
-                      job.id,
-                      e.target.value
-                    )
+                    updateStatus(job._id, e.target.value) // اصلاح شد: _id
                   }
                 >
                   <option>Applied</option>
@@ -196,21 +159,15 @@ export default function Jobs() {
 
                 <button
                   className="delete-btn"
-                  onClick={() => deleteJob(job.id)}
+                  onClick={() => deleteJob(job._id)} // اصلاح شد: _id
                 >
                   Delete
                 </button>
-
               </div>
-
             </div>
-
           ))
-
         )}
-
       </div>
-
     </div>
   );
 }
