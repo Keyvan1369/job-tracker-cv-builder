@@ -22,6 +22,7 @@ export default function MyCVs() {
 
   return (
     <div className="page-container">
+
       <div className="header-container">
         <button className="back-btn" onClick={() => navigate(-1)}>
           ← Back
@@ -37,9 +38,14 @@ export default function MyCVs() {
             <h2>{cv.fullName}</h2>
             <p>{cv.email}</p>
             <p>{new Date(cv.createdAt).toLocaleDateString()}</p>
+                <p>
+                 Template:
+                {cv.template}
+                </p>
           </div>
         ))
       )}
+
     </div>
   );
 }
