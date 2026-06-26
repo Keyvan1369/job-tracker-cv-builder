@@ -1,0 +1,67 @@
+name: Job Tracker CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+        with:
+          node-version: 22
+
+      ####################################################
+
+      - name: Install Backend
+
+        working-directory: backend
+
+        run: npm install
+
+      - name: Build Backend
+
+        working-directory: backend
+
+        run: npm run build --if-present
+
+      ####################################################
+
+      - name: Install Frontend
+
+        working-directory: frontend
+
+        run: npm install
+
+      - name: Build Frontend
+
+        working-directory: frontend
+
+        run: npm run build
+
+      ####################################################
+
+      - name: Docker Build Backend
+
+        run: docker build -t backend ./backend
+
+      - name: Docker Build Frontend
+
+        run: docker build -t frontend ./frontend
