@@ -77,3 +77,27 @@ export const deleteCV = async (
     });
   }
 };
+
+export const getCVById = async (req, res) => {
+  try {
+    const cv = await CV.findOne({
+      _id: req.params.id,
+      user: req.user.userId,
+    });
+
+    if (!cv) {
+      return res.status(404).json({
+        message: "CV not found",
+      });
+    }
+
+    res.json(cv);
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message,
+    });
+
+  }
+};
