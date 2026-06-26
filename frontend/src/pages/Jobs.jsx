@@ -26,20 +26,29 @@ export default function Jobs() {
     fetchJobs();
   }, []);
 
-  const addJob = async (e) => {
-    e.preventDefault();
-    try {
-      await api.post("/jobs", form);
-      setForm({
-        company: "",
-        title: "",
-        status: "Applied",
-      });
-      fetchJobs();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ const addJob = async (e) => {
+  e.preventDefault();
+
+  if (!form.company.trim() || !form.title.trim()) {
+    alert("Please enter both Company and Job Title.");
+    return;
+  }
+
+  try {
+    await api.post("/jobs", form);
+
+    setForm({
+      company: "",
+      title: "",
+      status: "Applied",
+    });
+
+    fetchJobs();
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   const deleteJob = async (id) => {
     try {
@@ -78,6 +87,7 @@ export default function Jobs() {
           type="text"
           placeholder="Company"
           value={form.company}
+          required
           onChange={(e) =>
             setForm({
               ...form,
@@ -90,6 +100,7 @@ export default function Jobs() {
           type="text"
           placeholder="Job Title"
           value={form.title}
+          required
           onChange={(e) =>
             setForm({
               ...form,
