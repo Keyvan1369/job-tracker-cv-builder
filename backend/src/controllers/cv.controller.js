@@ -28,3 +28,29 @@ export const getCVs = async (req, res) => {
     });
   }
 };
+export const updateCV = async (
+  req,
+  res
+) => {
+  try {
+    const cv =
+      await CV.findOneAndUpdate(
+        {
+          _id: req.params.id,
+          user:
+            req.user.userId,
+        },
+        req.body,
+        {
+          new: true,
+        }
+      );
+
+    res.json(cv);
+  } catch (error) {
+    res.status(500).json({
+      message:
+        error.message,
+    });
+  }
+};
