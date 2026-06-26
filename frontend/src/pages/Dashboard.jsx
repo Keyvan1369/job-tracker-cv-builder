@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import api from "../services/api";
 import JobStatusChart from "../components/JobStatusChart";
 import "../styles/Dashboard.css";
@@ -11,25 +11,25 @@ export default function Dashboard() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // تعریف تابع به صورت مجزا
+
   const fetchJobs = async () => {
     try {
-      setLoading(true); // شروع بارگذاری
+      setLoading(true);
       const res = await api.get("/jobs");
       setJobs(res.data);
     } catch (error) {
       console.error("Error fetching jobs:", error);
     } finally {
-      setLoading(false); // پایان بارگذاری در هر صورت
+      setLoading(false);
     }
   };
 
-  // فراخوانی تابع هنگام لود شدن صفحه
+
   useEffect(() => {
     fetchJobs();
   }, []);
 
-  // محاسبه آمار
+ 
   const totalJobs = jobs.length;
   const appliedJobs = jobs.filter((job) => job.status === "Applied").length;
   const interviewJobs = jobs.filter((job) => job.status === "Interview").length;
@@ -49,7 +49,7 @@ export default function Dashboard() {
           <p>Welcome back to your career hub.</p>
           <h2>Application Statistics</h2>
           <JobStatusChart jobs={jobs} />
-          
+
         </div>
 
         {loading ? (

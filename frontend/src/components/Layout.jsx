@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import "../styles/Layout.css";
 
 export default function Layout({ children }) {
@@ -7,7 +7,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="layout-container">
-      
+
       <div className="navbar">
         <div className="nav-links">
           <Link to="/dashboard" className="nav-link">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../services/api";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 
 import "../styles/Login.css";
 
@@ -93,7 +93,7 @@ export default function Login() {
 
         <h1>
 
-          Welcome Back 
+          Welcome Back
 
         </h1>
 
