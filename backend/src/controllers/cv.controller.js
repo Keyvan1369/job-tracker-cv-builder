@@ -54,3 +54,26 @@ export const updateCV = async (
     });
   }
 };
+
+export const deleteCV = async (
+  req,
+  res
+) => {
+  try {
+    await CV.findOneAndDelete({
+      _id: req.params.id,
+      user:
+        req.user.userId,
+    });
+
+    res.json({
+      message:
+        "Deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message:
+        error.message,
+    });
+  }
+};
