@@ -56,7 +56,7 @@ export default function MyCVs() {
                  Template:
                 {cv.template}
                 </p>
-                <button onClick={() =>handleDelete(cv._id)}>
+                <button className="delete-btn" onClick={() =>handleDelete(cv._id)}>
                   Delete
                 </button>
           </div>
