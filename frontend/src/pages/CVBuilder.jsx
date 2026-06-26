@@ -59,7 +59,10 @@ export default function CVBuilder() {
 
   const saveCV = async () => {
     try {
-      const res = await api.post("/cvs", cvData);
+      const res = await await api.post("/cvs", {
+  ...cvData,
+  template,
+});
       console.log(res.data);
       alert("CV saved successfully!");
     } catch (error) {
@@ -85,7 +88,7 @@ export default function CVBuilder() {
 
   return (
     <div className="cv-container">
-      
+
       <div className="cv-form">
         <h1>CV Builder</h1>
         <p>Create your professional resume</p>
