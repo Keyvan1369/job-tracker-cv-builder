@@ -3,9 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import api from "../services/api";
 import JobStatusChart from "../components/JobStatusChart";
-import { Box, Toolbar } from "@mui/material";
+
+import { Box, Toolbar, Grid } from "@mui/material";
+import WorkIcon from "@mui/icons-material/Work";
+import DescriptionIcon from "@mui/icons-material/Description";
+import GroupsIcon from "@mui/icons-material/Groups";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import CancelIcon from "@mui/icons-material/Cancel";
+
 import Sidebar from "../components/layout/Sidebar";
 import Topbar from "../components/layout/Topbar";
+import StatCard from "../components/dashboard/StatCard";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {
@@ -62,28 +70,52 @@ export default function Dashboard() {
               <div className="loading">Loading...</div>
             ) : (
               <>
-                <div className="stats-grid">
-                  <div className="stat-card">
-                    <h3>Total Jobs</h3>
-                    <span>{totalJobs}</span>
-                  </div>
-                  <div className="stat-card">
-                    <h3>Applied</h3>
-                    <span>{appliedJobs}</span>
-                  </div>
-                  <div className="stat-card">
-                    <h3>Interview</h3>
-                    <span>{interviewJobs}</span>
-                  </div>
-                  <div className="stat-card">
-                    <h3>Offer</h3>
-                    <span>{offerJobs}</span>
-                  </div>
-                  <div className="stat-card">
-                    <h3>Rejected</h3>
-                    <span>{rejectedJobs}</span>
-                  </div>
-                </div>
+                <Grid container spacing={3} sx={{ mb: 4 }}>
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+                    <StatCard
+                      title="Total Jobs"
+                      value={totalJobs}
+                      icon={<WorkIcon />}
+                      color="primary"
+                    />
+                  </Grid>
+
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+                    <StatCard
+                      title="Applied"
+                      value={appliedJobs}
+                      icon={<DescriptionIcon />}
+                      color="info"
+                    />
+                  </Grid>
+
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+                    <StatCard
+                      title="Interviews"
+                      value={interviewJobs}
+                      icon={<GroupsIcon />}
+                      color="warning"
+                    />
+                  </Grid>
+
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+                    <StatCard
+                      title="Offers"
+                      value={offerJobs}
+                      icon={<EmojiEventsIcon />}
+                      color="success"
+                    />
+                  </Grid>
+
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+                    <StatCard
+                      title="Rejected"
+                      value={rejectedJobs}
+                      icon={<CancelIcon />}
+                      color="error"
+                    />
+                  </Grid>
+                </Grid>
 
                 <div className="quick-actions">
                   <h2>Quick Actions</h2>
