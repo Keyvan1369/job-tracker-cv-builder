@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import api from "../services/api";
 import JobStatusChart from "../components/JobStatusChart";
+import { Box, Toolbar } from "@mui/material";
+import Sidebar from "../components/layout/Sidebar";
+import Topbar from "../components/layout/Topbar";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {
@@ -11,25 +14,22 @@ export default function Dashboard() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   const fetchJobs = async () => {
     try {
       setLoading(true);
       const res = await api.get("/jobs");
       setJobs(res.data);
     } catch (error) {
-      console.error("Error fetching jobs:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-
   useEffect(() => {
     fetchJobs();
   }, []);
 
- 
   const totalJobs = jobs.length;
   const appliedJobs = jobs.filter((job) => job.status === "Applied").length;
   const interviewJobs = jobs.filter((job) => job.status === "Interview").length;
@@ -42,69 +42,79 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-content">
-        <div className="welcome-section">
-          <h1>Hello {user?.name || "User"}</h1>
-          <p>Welcome back to your career hub.</p>
-          <h2>Application Statistics</h2>
-          <JobStatusChart jobs={jobs} />
+    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+      <Sidebar />
+      <Topbar />
 
-        </div>
+      <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
+        <Toolbar />
 
-        {loading ? (
-          <div className="loading">Loading...</div>
-        ) : (
-          <>
-            <div className="stats-grid">
-              <div className="stat-card">
-                <h3>Total Jobs</h3>
-                <span>{totalJobs}</span>
-              </div>
-              <div className="stat-card">
-                <h3>Applied</h3>
-                <span>{appliedJobs}</span>
-              </div>
-              <div className="stat-card">
-                <h3>Interview</h3>
-                <span>{interviewJobs}</span>
-              </div>
-              <div className="stat-card">
-                <h3>Offer</h3>
-                <span>{offerJobs}</span>
-              </div>
-              <div className="stat-card">
-                <h3>Rejected</h3>
-                <span>{rejectedJobs}</span>
-              </div>
+        <div className="dashboard">
+          <div className="dashboard-content">
+            <div className="welcome-section">
+              <h1>Hello {user?.name || "User"}!</h1>
+              <p>Welcome back to your career hub.</p>
+              <h2>Application Statistics</h2>
+              <JobStatusChart jobs={jobs} />
             </div>
 
-            <div className="quick-actions">
-              <h2>Quick Actions</h2>
-              <div className="action-buttons">
-                <button onClick={() => navigate("/jobs")}>Job Tracker</button>
-                <button onClick={() => navigate("/cv-builder")}>CV Builder</button>
-                <button onClick={() => navigate('/my-cvs')}>My CVs</button>
-              </div>
-            </div>
-
-            <div className="recent-section">
-              <h2>Recent Applications</h2>
-              {jobs.length === 0 ? (
-                <div className="empty-state">No job applications yet.</div>
-              ) : (
-                jobs.slice(0, 5).map((job) => (
-                  <div className="recent-card" key={job._id || job.id}>
-                    <h3>{job.company}</h3>
-                    <p>{job.title}</p>
-                    <span className={`status-${job.status?.toLowerCase()}`}>{job.status}</span>
+            {loading ? (
+              <div className="loading">Loading...</div>
+            ) : (
+              <>
+                <div className="stats-grid">
+                  <div className="stat-card">
+                    <h3>Total Jobs</h3>
+                    <span>{totalJobs}</span>
                   </div>
-                ))
-              )}
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+                  <div className="stat-card">
+                    <h3>Applied</h3>
+                    <span>{appliedJobs}</span>
+                  </div>
+                  <div className="stat-card">
+                    <h3>Interview</h3>
+                    <span>{interviewJobs}</span>
+                  </div>
+                  <div className="stat-card">
+                    <h3>Offer</h3>
+                    <span>{offerJobs}</span>
+                  </div>
+                  <div className="stat-card">
+                    <h3>Rejected</h3>
+                    <span>{rejectedJobs}</span>
+                  </div>
+                </div>
+
+                <div className="quick-actions">
+                  <h2>Quick Actions</h2>
+                  <div className="action-buttons">
+                    <button onClick={() => navigate("/jobs")}>Job Tracker</button>
+                    <button onClick={() => navigate("/cv-builder")}>CV Builder</button>
+                    <button onClick={() => navigate("/my-cvs")}>My CVs</button>
+                  </div>
+                </div>
+
+                <div className="recent-section">
+                  <h2>Recent Applications</h2>
+                  {jobs.length === 0 ? (
+                    <div className="empty-state">No job applications yet.</div>
+                  ) : (
+                    jobs.slice(0, 5).map((job) => (
+                      <div className="recent-card" key={job._id || job.id}>
+                        <h3>{job.company}</h3>
+                        <p>{job.title}</p>
+                        <span className={`status-${job.status?.toLowerCase()}`}>
+                          {job.status}
+                        </span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </Box>
+    </Box>
   );
 }
