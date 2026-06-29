@@ -33,10 +33,42 @@ export default function Dashboard() {
       setLoading(false);
     }
   };
+  const fetchStats = async () => {
+
+  try {
+
+    const res = await api.get(
+      "/dashboard/stats"
+    );
+
+    setStats(res.data);
+
+  }
+
+  catch (error) {
+
+    console.log(error);
+
+  }
+
+};
 
   useEffect(() => {
     fetchJobs();
+    fetchStats();
   }, []);
+
+  const [stats, setStats] = useState({
+
+  jobs: 0,
+
+  cvs: 0,
+
+  interviews: 0,
+
+  offers: 0,
+
+});
 
   const totalJobs = jobs.length;
   const appliedJobs = jobs.filter((job) => job.status === "Applied").length;
@@ -115,7 +147,15 @@ export default function Dashboard() {
                       color="error"
                     />
                   </Grid>
-                </Grid>
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+                    <StatCard
+                    title="CVs"
+                    value={stats.cvs}
+                    icon={<DescriptionIcon />}
+                    color="secondary"
+                    />
+                  </Grid>
+              </Grid>
 
                 <div className="quick-actions">
                   <h2>Quick Actions</h2>
