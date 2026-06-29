@@ -1,18 +1,15 @@
 import { useRef, useState, useEffect  } from "react";
+import {useParams} from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
-import ModernTemplate from "../components/templates/ModernTemplate";
-import ProfessionalTemplate from "../components/templates/ProfessionalTemplate";
-import MinimalTemplate from "../components/templates/MinimalTemplate";
-import CreativeTemplate from "../components/templates/CreativeTemplate";
-import {useParams} from "react-router-dom";
+import TemplateRenderer from "../components/templates/TemplateRenderer";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
   const cvRef = useRef();
 
-  
+
 
   const [cvData, setCvData] = useState({
     fullName: "",
@@ -76,18 +73,7 @@ export default function CVBuilder() {
     }
   };
 
-  const renderTemplate = () => {
-    switch (template) {
-      case "professional":
-        return <ProfessionalTemplate cvData={cvData} />;
-      case "minimal":
-        return <MinimalTemplate cvData={cvData} />;
-      case "creative":
-        return <CreativeTemplate cvData={cvData} />;
-      default:
-        return <ModernTemplate cvData={cvData} />;
-    }
-  };
+
   const { id } = useParams();
   const fetchCV = async () => {
 
@@ -254,7 +240,10 @@ useEffect(() => {
 
 
         <div className="cv-preview" ref={cvRef}>
-          {renderTemplate()}
+          <TemplateRenderer
+          template={template}
+          data={cvData}
+          />
         </div>
       </div>
     </div>
