@@ -1,4 +1,4 @@
-import Job from "../models/job.model.js";
+import Job from "../models/Job.js";
 import CV from "../models/cv.model.js";
 
 export const getDashboardStats = async (req, res) => {
