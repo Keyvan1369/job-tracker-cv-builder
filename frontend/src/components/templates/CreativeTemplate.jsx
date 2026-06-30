@@ -12,7 +12,7 @@ export default function CreativeTemplate({ data }) {
     <div className="creative-template">
       <aside className="sidebar">
         <h2>Contact</h2>
-        {data.email && <p className="contact-item">{data.email}</p>}
+        {data.email && <p className="contact-item email-text">{data.email}</p>}
         {data.phone && <p className="contact-item">{data.phone}</p>}
         {data.location && <p className="contact-item">{data.location}</p>}
 
@@ -22,7 +22,7 @@ export default function CreativeTemplate({ data }) {
       <main className="content">
         <header className="creative-header">
           <h1>{data.fullName}</h1>
-          {data.jobTitle && <h2 className="job-title">{data.jobTitle}</h2>}
+          {data.jobTitle && <span className="job-title">{data.jobTitle}</span>}
         </header>
 
         <Summary data={data} />
