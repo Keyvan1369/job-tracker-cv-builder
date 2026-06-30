@@ -1,107 +1,149 @@
+.creative-template,
+.creative-template * {
+  box-sizing: border-box;
+}
+
 .creative-template {
   display: flex;
-  max-width: 850px;
-  margin: 30px auto;
+  max-width: 900px;
+  margin: 40px auto;
   background-color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
 }
 
+/* سایدبار سمت چپ */
 .creative-template .sidebar {
   width: 30%;
   background-color: #1a252f;
   color: #ecf0f1;
-  padding: 40px 30px;
+  padding: 45px 25px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 28px;
+}
+
+/* چپ‌چین کردن مطلق تمام عناصر، تگ‌ها و کامپوننت‌های داخل سایدبار */
+.creative-template .sidebar,
+.creative-template .sidebar *,
+.creative-template .sidebar .contact-item {
+  text-align: left !important;
+  align-items: flex-start !important;
 }
 
 .creative-template .sidebar h2 {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
   color: #3498db;
   border-bottom: 2px solid #3498db;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
+  width: 100%;
 }
 
-.creative-template .sidebar p {
-  font-size: 0.95rem;
-  margin: 0;
-  word-wrap: break-word;
-  opacity: 0.85;
+/* استایل آیتم‌های اطلاعات تماس */
+.creative-template .sidebar .contact-item {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+  display: block;
+  width: 100%;
+  color: #ecf0f1;
 }
 
+/* حل مشکل شکستن خط ایمیل و کوچک کردن فونت آن */
+.creative-template .sidebar .email-text {
+  font-size: 11px !important; /* سایز کوچک برای جا شدن کامل در ۳۰٪ عرض */
+  white-space: nowrap !important; /* جلوگیری از شکستن خط */
+  overflow: hidden;
+  text-overflow: ellipsis; /* اگر در مانیتور خیلی کوچک باز هم جا نشد سه نقطه می‌گیرد */
+}
+
+/* بخش محتوای اصلی سمت راست */
 .creative-template .content {
   width: 70%;
-  padding: 50px 40px;
+  padding: 55px 50px;
   display: flex;
   flex-direction: column;
 }
 
 .creative-template .creative-header {
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .creative-template .content h1 {
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   color: #2c3e50;
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
   font-weight: 700;
 }
 
+/* استایل اصلاح‌شده عنوان شغلی */
 .creative-template .content .job-title {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   color: #3498db;
   margin: 0;
   font-weight: 500;
+  display: block;
+  letter-spacing: 0.5px;
 }
 
+/* عناوین بخش‌های کامپوننت (Summary, Experience, Education) */
 .creative-template .content h2 {
   font-size: 1.4rem;
   color: #2c3e50;
-  margin: 30px 0 15px 0;
+  margin: 40px 0 20px 0;
   border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
+  text-align: left;
 }
 
 .creative-template .content p {
   font-size: 1.05rem;
   color: #555555;
-  line-height: 1.7;
-  margin: 0;
+  line-height: 1.85;
+  margin: 0 0 15px 0;
   text-align: justify;
 }
 
 .creative-template .preview-item {
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .creative-template .preview-item h3 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: #2c3e50;
-  margin: 0 0 5px 0;
+  margin: 0 0 6px 0;
 }
 
 .creative-template .preview-item strong {
   color: #7f8c8d;
   font-size: 0.95rem;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .creative-template {
     flex-direction: column;
-    margin: 15px;
+    margin: 20px;
   }
 
   .creative-template .sidebar,
   .creative-template .content {
     width: 100%;
-    padding: 30px;
+    padding: 35px;
+  }
+
+  .creative-template .sidebar .email-text {
+    font-size: 0.85rem !important; /* بازگشت به سایز عادی در حالت موبایل */
+  }
+
+  .creative-template .content p {
+    text-align: left;
   }
 }
