@@ -235,6 +235,7 @@ useEffect(() => {
             <option value="professional">Professional</option>
             <option value="minimal">Minimal</option>
             <option value="creative">Creative</option>
+            <option value="executive">Executive</option>
           </select>
         </div>
 

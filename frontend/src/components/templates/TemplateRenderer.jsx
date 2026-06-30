@@ -2,6 +2,7 @@ import ModernTemplate from "./ModernTemplate.jsx";
 import MinimalTemplate from "./MinimalTemplate.jsx";
 import ProfessionalTemplate from "./ProfessionalTemplate.jsx";
 import CreativeTemplate from "./CreativeTemplate.jsx";
+import ExecutiveTemplate from "./ExecutiveTemplate.jsx";
 
 export default function TemplateRenderer({
     template,
@@ -18,9 +19,13 @@ export default function TemplateRenderer({
 
         case "creative":
             return <CreativeTemplate data={data}/>;
+        case "executive":
+            return <ExecutiveTemplate data={data} />;
 
         default:
             return <ModernTemplate data={data}/>;
+
+
 
     }
 
