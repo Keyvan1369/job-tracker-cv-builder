@@ -1,36 +1,33 @@
-import Header from "../cv/Header";
-import Summary from "../cv/Summary";
-import Skills from "../cv/Skills";
-import Experience from "../cv/Experience";
-import Education from "../cv/Education";
+import Header from "../cv/Header.jsx";
+import Summary from "../cv/Summary.jsx";
+import Skills from "../cv/Skills.jsx";
+import Experience from "../cv/Experience.jsx";
+import Education from "../cv/Education.jsx";
 
 import "../../styles/template/ExecutiveTemplate.css";
 
 export default function ExecutiveTemplate({ data }) {
+  if (!data) return null;
+
   return (
     <div className="executive-template">
+      <header className="executive-header">
+        <h1 className="executive-name">{data.fullName}</h1>
+        <h2 className="executive-title">{data.jobTitle}</h2>
 
+        <div className="contact-row">
+          {data.email && <span>{data.email}</span>}
+          {data.phone && <span>{data.phone}</span>}
+          {data.location && <span>{data.location}</span>}
+        </div>
+      </header>
 
-    <h1>{data.fullName}</h1>
-
-    <h2>{data.jobTitle}</h2>
-
-    <div className="contact-row">
-
-    <span>{data.email}</span>
-
-    <span>{data.phone}</span>
-
-    <span>{data.location}</span>
-
-  </div>
-    <Summary data={data.summary} />
-
-    <Experience data={data.experiences} />
-
-    <Skills data={data.skills} />
-
-    <Education data={data.educations} />
+      <main className="executive-body">
+        <Summary data={data} />
+        <Experience data={data} />
+        <Skills data={data} />
+        <Education data={data} />
+      </main>
     </div>
   );
 }

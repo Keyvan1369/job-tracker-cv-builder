@@ -1,31 +1,95 @@
+.executive-template {
+  font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+  color: #1a202c;
+  background-color: #ffffff;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* بخش هدر رزومه */
 .executive-header {
-  background: #0f172a;
-  color: white;
-  padding: 35px;
   text-align: center;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  border-bottom: 2px solid #2d3748;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.executive-header h1 {
-  margin: 0;
-  font-size: 36px;
+.executive-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a202c;
+  text-transform: uppercase;
   letter-spacing: 1px;
+  margin: 0 0 5px 0;
 }
 
-.executive-header h2 {
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: 400;
-  color: #cbd5e1;
-  border: none;
+.executive-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 15px 0;
 }
 
+/* ردیف اطلاعات تماس */
 .contact-row {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 20px;
+  font-size: 13px;
+  color: #718096;
   flex-wrap: wrap;
+}
+
+.contact-row span:not(:last-child)::after {
+  content: "•";
+  margin-left: 20px;
+  color: #a0aec0;
+}
+
+/* ساختار بخش‌های داخلی (تگ‌های h2 داخل کامپوننت‌ها) */
+.executive-body h2 {
   font-size: 14px;
+  font-weight: 700;
+  color: #2d3748;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 5px;
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+/* استایل کلی برای متن‌ها و آیتم‌ها */
+.executive-body p {
+  font-size: 14px;
+  color: #4a5568;
+  margin: 0 0 10px 0;
+}
+
+/* این کلاس‌ها را می‌توانید در کامپوننت‌های فرعی مثل Experience استفاده کنید */
+.preview-item {
+  margin-bottom: 15px;
+}
+
+.preview-item h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 2px 0;
+}
+
+.preview-item strong {
+  font-size: 13px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.preview-item p {
+  font-size: 13px;
+  color: #718096;
+  margin-top: 5px;
 }
