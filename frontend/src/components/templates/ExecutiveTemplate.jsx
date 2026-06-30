@@ -12,22 +12,52 @@ export default function ExecutiveTemplate({ data }) {
   return (
     <div className="executive-template">
       <header className="executive-header">
-        <h1 className="executive-name">{data.fullName}</h1>
-        <h2 className="executive-title">{data.jobTitle}</h2>
+        <div className="header-main">
+          <h1 className="executive-name">{data.fullName}</h1>
+          {data.jobTitle && <h2 className="executive-title">{data.jobTitle}</h2>}
+        </div>
 
-        <div className="contact-row">
-          {data.email && <span>{data.email}</span>}
-          {data.phone && <span>{data.phone}</span>}
-          {data.location && <span>{data.location}</span>}
+        <div className="contact-grid">
+          {data.email && (
+            <div className="contact-item">
+              <span className="contact-label">Email:</span>
+              <span className="contact-value">{data.email}</span>
+            </div>
+          )}
+          {data.phone && (
+            <div className="contact-item">
+              <span className="contact-label">Phone:</span>
+              <span className="contact-value">{data.phone}</span>
+            </div>
+          )}
+          {data.location && (
+            <div className="contact-item">
+              <span className="contact-label">Location:</span>
+              <span className="contact-value">{data.location}</span>
+            </div>
+          )}
         </div>
       </header>
 
-      <main className="executive-body">
-        <Summary data={data} />
-        <Experience data={data} />
-        <Skills data={data} />
-        <Education data={data} />
-      </main>
+      <div className="executive-layout">
+        <main className="executive-main-content">
+          <section className="section-wrapper">
+            <Summary data={data} />
+          </section>
+          <section className="section-wrapper">
+            <Experience data={data} />
+          </section>
+        </main>
+
+        <aside className="executive-sidebar">
+          <section className="section-wrapper">
+            <Skills data={data} />
+          </section>
+          <section className="section-wrapper">
+            <Education data={data} />
+          </section>
+        </aside>
+      </div>
     </div>
   );
 }

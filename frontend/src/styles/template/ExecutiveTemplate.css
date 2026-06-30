@@ -1,95 +1,176 @@
 .executive-template {
-  font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
-  color: #1a202c;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
   background-color: #ffffff;
-  padding: 40px;
-  max-width: 800px;
+  padding: 50px;
+  max-width: 900px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
-/* بخش هدر رزومه */
 .executive-header {
-  text-align: center;
-  border-bottom: 2px solid #2d3748;
-  padding-bottom: 20px;
-  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  gap: 24px;
 }
 
 .executive-name {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
-  color: #1a202c;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 5px 0;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px 0;
 }
 
 .executive-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
-  color: #4a5568;
+  color: #475569;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin: 0 0 15px 0;
+  margin: 0;
 }
 
-/* ردیف اطلاعات تماس */
-.contact-row {
+.contact-grid {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
   font-size: 13px;
-  color: #718096;
-  flex-wrap: wrap;
 }
 
-.contact-row span:not(:last-child)::after {
-  content: "•";
-  margin-left: 20px;
-  color: #a0aec0;
+.contact-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
 }
 
-/* ساختار بخش‌های داخلی (تگ‌های h2 داخل کامپوننت‌ها) */
-.executive-body h2 {
+.contact-label {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.contact-value {
+  color: #334155;
+}
+
+.executive-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+}
+
+.executive-main-content,
+.executive-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section-wrapper h2 {
   font-size: 14px;
   font-weight: 700;
-  color: #2d3748;
+  color: #0f172a;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin: 0 0 16px 0;
+  padding-bottom: 6px;
   border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 5px;
-  margin-top: 25px;
-  margin-bottom: 12px;
 }
 
-/* استایل کلی برای متن‌ها و آیتم‌ها */
-.executive-body p {
-  font-size: 14px;
-  color: #4a5568;
-  margin: 0 0 10px 0;
-}
-
-/* این کلاس‌ها را می‌توانید در کامپوننت‌های فرعی مثل Experience استفاده کنید */
 .preview-item {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.preview-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
 }
 
 .preview-item h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #1a202c;
-  margin: 0 0 2px 0;
+  color: #1e293b;
+  margin: 0;
+}
+
+.preview-item .date-range {
+  font-size: 12px;
+  color: #475569;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .preview-item strong {
   font-size: 13px;
-  color: #4a5568;
-  font-weight: 500;
+  color: #64748b;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 6px;
 }
 
 .preview-item p {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 0;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skill-group {
   font-size: 13px;
-  color: #718096;
-  margin-top: 5px;
+  line-height: 1.5;
+}
+
+.skill-group strong {
+  color: #0f172a;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.skill-group span {
+  color: #475569;
+}
+
+.executive-main-content p {
+  font-size: 14px;
+  color: #475569;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .executive-template {
+    padding: 24px;
+  }
+
+  .executive-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .contact-grid {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .contact-item {
+    justify-content: flex-start;
+  }
+
+  .executive-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
