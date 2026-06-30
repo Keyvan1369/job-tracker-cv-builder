@@ -11,7 +11,7 @@ const cvSchema = new mongoose.Schema(
   type: String,
   default: "modern",
 },
-
+    jobTitle: String,
     fullName: String,
     email: String,
     phone: String,
