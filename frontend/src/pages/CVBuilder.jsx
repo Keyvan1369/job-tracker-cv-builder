@@ -233,8 +233,8 @@ useEffect(() => {
           + Add Education
         </button>
         {cvData.projects.map((project, index) => (
-  <div className="experience-box" key={index}>
- <h2>Projects</h2>
+      <div className="experience-box" key={index}>
+      <h2>Projects</h2>
     <input
       placeholder="Project Name"
       value={project.name}
