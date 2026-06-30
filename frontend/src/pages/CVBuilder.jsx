@@ -21,6 +21,14 @@ export default function CVBuilder() {
     skills: "",
     experiences: [{ company: "", position: "", period: "", description: "" }],
     educations: [{ school: "", degree: "", year: "" }],
+     projects: [
+    {
+      name: "",
+      technologies: "",
+      github: "",
+      live: "",
+      description: "",
+    }],
   });
   const [template, setTemplate] = useState("modern");
 
@@ -214,6 +222,7 @@ useEffect(() => {
               onChange={(e) => handleNestedChange(index, "educations", "year", e.target.value)}
             />
           </div>
+
         ))}
 
         <button
@@ -223,6 +232,89 @@ useEffect(() => {
         >
           + Add Education
         </button>
+        {cvData.projects.map((project, index) => (
+  <div className="experience-box" key={index}>
+ <h2>Projects</h2>
+    <input
+      placeholder="Project Name"
+      value={project.name}
+      onChange={(e) =>
+        handleNestedChange(
+          index,
+          "projects",
+          "name",
+          e.target.value
+        )
+      }
+    />
+
+    <input
+      placeholder="Technologies"
+      value={project.technologies}
+      onChange={(e) =>
+        handleNestedChange(
+          index,
+          "projects",
+          "technologies",
+          e.target.value
+        )
+      }
+    />
+
+    <input
+      placeholder="GitHub URL"
+      value={project.github}
+      onChange={(e) =>
+        handleNestedChange(
+          index,
+          "projects",
+          "github",
+          e.target.value
+        )
+      }
+    />
+
+    <input
+      placeholder="Live Demo URL"
+      value={project.live}
+      onChange={(e) =>
+        handleNestedChange(
+          index,
+          "projects",
+          "live",
+          e.target.value
+        )
+      }
+    />
+
+    <textarea
+      placeholder="Project Description"
+      value={project.description}
+      onChange={(e) =>
+        handleNestedChange(
+          index,
+          "projects",
+          "description",
+          e.target.value
+        )
+      }
+    />
+
+  </div>
+))}
+
+<button type="button" className="add-btn"onClick={() => addItem("projects",
+   {
+      name: "",
+      technologies: "",
+      github: "",
+      live: "",
+      description: "",
+    })
+  }
+>
+  + Add Project
+</button>
 
         <div className="action-buttons" style={{ marginTop: "20px" }}>
           <button className="download-btn" onClick={downloadPDF}>
