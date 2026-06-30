@@ -1,41 +1,33 @@
-import "../../styles/template/MinimalTemplate.css"
+import Header from "../cv/Header.jsx";
+import Summary from "../cv/Summary.jsx";
+import Skills from "../cv/Skills.jsx";
+import Experience from "../cv/Experience.jsx";
+import Education from "../cv/Education.jsx";
 
-export default function MinimalTemplate({
-  data,
-}) {
+import "../../styles/template/MinimalTemplate.css";
+
+export default function MinimalTemplate({ data }) {
+  if (!data) return null;
+
   return (
     <div className="minimal-template">
+      <header className="minimal-header">
+        <h1 className="minimal-name">{data.fullName}</h1>
+        {data.jobTitle && <h2 className="minimal-title">{data.jobTitle}</h2>}
 
-      <h1>
-        {data.fullName}
-      </h1>
+        <div className="contact-row">
+          {data.email && <span>{data.email}</span>}
+          {data.phone && <span>{data.phone}</span>}
+          {data.location && <span>{data.location}</span>}
+        </div>
+      </header>
 
-      <p>
-        {data.email}
-      </p>
-
-      <p>
-        {data.phone}
-      </p>
-
-      <h2>Experience</h2>
-
-      {data.experiences.map(
-        (exp, index) => (
-          <div key={index}>
-
-            <strong>
-              {exp.position}
-            </strong>
-
-            <p>
-              {exp.company}
-            </p>
-
-          </div>
-        )
-      )}
-
+      <main className="minimal-body">
+        <Summary data={data} />
+        <Experience data={data} />
+        <Skills data={data} />
+        <Education data={data} />
+      </main>
     </div>
   );
 }

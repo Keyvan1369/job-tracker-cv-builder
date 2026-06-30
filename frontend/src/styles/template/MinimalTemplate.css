@@ -5,20 +5,38 @@
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333333;
   line-height: 1.6;
-  
 }
 
-.minimal-template h1 {
+.minimal-template .minimal-name {
   font-size: 2.2rem;
   font-weight: 500;
   margin-bottom: 5px;
   color: #111111;
 }
 
+.minimal-template .minimal-title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #666666;
+  margin: 0 0 10px 0;
+}
+
 .minimal-template p {
   font-size: 0.95rem;
   color: #666666;
   margin: 4px 0;
+}
+
+.minimal-template .contact-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.minimal-template .contact-row span {
+  font-size: 0.95rem;
+  color: #666666;
 }
 
 .minimal-template h2 {
@@ -32,7 +50,7 @@
   color: #222222;
 }
 
-.minimal-template div {
+.minimal-template .preview-item {
   margin-bottom: 20px;
 }
 
@@ -43,7 +61,7 @@
   margin-bottom: 2px;
 }
 
-.minimal-template div p {
+.minimal-template .preview-item p {
   font-size: 1rem;
   color: #444444;
   margin: 0;
