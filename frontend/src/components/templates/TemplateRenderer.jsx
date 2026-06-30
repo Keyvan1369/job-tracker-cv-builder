@@ -1,7 +1,7 @@
-import ModernTemplate from "./ModernTemplate";
-import MinimalTemplate from "./MinimalTemplate";
-import ProfessionalTemplate from "./ProfessionalTemplate";
-import CreativeTemplate from "./CreativeTemplate";
+import ModernTemplate from "./ModernTemplate.jsx";
+import MinimalTemplate from "./MinimalTemplate.jsx";
+import ProfessionalTemplate from "./ProfessionalTemplate.jsx";
+import CreativeTemplate from "./CreativeTemplate.jsx";
 
 export default function TemplateRenderer({
     template,

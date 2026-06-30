@@ -1,6 +1,6 @@
-export default function Summary({ cvData }) {
+export default function Summary({ data }) {
 
-    if(!cvData.summary) return null;
+    if(!data.summary) return null;
 
     return (
 
@@ -8,7 +8,7 @@ export default function Summary({ cvData }) {
 
             <h2>Summary</h2>
 
-            <p>{cvData.summary}</p>
+            <p>{data.summary}</p>
 
         </>
 

@@ -1,8 +1,8 @@
 export default function Experience({
-    cvData
+    data
 }) {
 
-    if(!cvData.experiences?.length)
+    if(!data.experiences?.length)
         return null;
 
     return (
@@ -11,7 +11,7 @@ export default function Experience({
 
             <h2>Experience</h2>
 
-            {cvData.experiences.map((exp,index)=>(
+            {data.experiences.map((exp,index)=>(
 
                 <div
                     key={index}

@@ -1,26 +1,26 @@
 import "../../styles/template/MinimalTemplate.css"
 
 export default function MinimalTemplate({
-  cvData,
+  data,
 }) {
   return (
     <div className="minimal-template">
 
       <h1>
-        {cvData.fullName}
+        {data.fullName}
       </h1>
 
       <p>
-        {cvData.email}
+        {data.email}
       </p>
 
       <p>
-        {cvData.phone}
+        {data.phone}
       </p>
 
       <h2>Experience</h2>
 
-      {cvData.experiences.map(
+      {data.experiences.map(
         (exp, index) => (
           <div key={index}>
 

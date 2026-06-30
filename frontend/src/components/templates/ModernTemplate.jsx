@@ -1,43 +1,29 @@
-import "../../styles/template/ModernTemplate.css"
+import "../../styles/template/ModernTemplate.css";
 
+import Header from "../cv/Header.jsx";
+import Summary from "../cv/Summary.jsx";
+import Skills from "../cv/Skills.jsx";
+import Experience from "../cv/Experience.jsx";
+import Education from "../cv/Education.jsx";
 
-export default function ModernTemplate({
-  cvData,
-}) {
+export default function ModernTemplate({ data }) {
   return (
     <div className="modern-template">
-    <div>
 
-      <h1>
-        {cvData.fullName}
-      </h1>
+     <Header
+    fullName={data.fullName}
+    email={data.email}
+    phone={data.phone}
+    location={data.location}
+/>
 
-      <p>
-        {cvData.email}
-      </p>
+<Summary data={data} />
 
-      <hr />
+<Skills data={data} />
 
-      <h2>Summary</h2>
+<Experience data={data} />
 
-      <p>
-        {cvData.summary}
-      </p>
-
-      <h2>Skills</h2>
-
-      {cvData.skills
-        .split(",")
-        .map((skill, index) => (
-          <span
-            key={index}
-            className="skill-tag"
-          >
-            {skill.trim()}
-          </span>
-        ))}
-
-    </div>
+<Education data={data} />
     </div>
   );
 }

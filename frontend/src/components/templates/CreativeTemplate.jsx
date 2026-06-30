@@ -1,7 +1,7 @@
 import "../../styles/template/CreativeTemplate.css"
 
 export default function CreativeTemplate({
-  cvData,
+  data,
 }) {
   return (
     <div className="creative-template">
@@ -12,20 +12,20 @@ export default function CreativeTemplate({
           Contact
         </h2>
 
-        <p>{cvData.email}</p>
+        <p>{data.email}</p>
 
-        <p>{cvData.phone}</p>
+        <p>{data.phone}</p>
 
       </div>
 
       <div className="content">
 
         <h1>
-          {cvData.fullName}
+          {data.fullName}
         </h1>
 
         <p>
-          {cvData.summary}
+          {data.summary}
         </p>
 
       </div>

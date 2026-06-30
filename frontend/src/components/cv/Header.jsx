@@ -1,17 +1,20 @@
-export default function Header({ cvData }) {
+export default function Header({
+  fullName,
+  email,
+  phone,
+  location,
+}) {
   return (
     <div className="cv-header">
-      <h1>{cvData.fullName || "Your Name"}</h1>
+      <h1>{fullName || "Your Name"}</h1>
 
       <p>
-        {cvData.email}
-
-        {cvData.email && cvData.phone && " | "}
-
-        {cvData.phone}
+        {email}
+        {email && phone && " | "}
+        {phone}
       </p>
 
-      <p>{cvData.location}</p>
+      <p>{location}</p>
     </div>
   );
 }

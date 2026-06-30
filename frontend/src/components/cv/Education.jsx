@@ -1,8 +1,8 @@
 export default function Education({
-    cvData
+    data
 }) {
 
-    if(!cvData.educations?.length)
+    if(!data.educations?.length)
         return null;
 
     return (
@@ -11,7 +11,7 @@ export default function Education({
 
             <h2>Education</h2>
 
-            {cvData.educations.map((edu,index)=>(
+            {data.educations.map((edu,index)=>(
 
                 <div
                     key={index}

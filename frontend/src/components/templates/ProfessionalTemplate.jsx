@@ -2,7 +2,7 @@ import "../../styles/template/ProfessionalTemplate.css"
 
 
 export default function ProfessionalTemplate({
-  cvData,
+  data,
 }) {
   return (
     <div className="professional-template">
@@ -11,24 +11,24 @@ export default function ProfessionalTemplate({
 
         <h2>Contact</h2>
 
-        <p>{cvData.email}</p>
+        <p>{data.email}</p>
 
-        <p>{cvData.phone}</p>
+        <p>{data.phone}</p>
 
-        <p>{cvData.location}</p>
+        <p>{data.location}</p>
 
       </div>
 
       <div className="right-side">
 
         <h1>
-          {cvData.fullName}
+          {data.fullName}
         </h1>
 
         <h2>Summary</h2>
 
         <p>
-          {cvData.summary}
+          {data.summary}
         </p>
 
       </div>

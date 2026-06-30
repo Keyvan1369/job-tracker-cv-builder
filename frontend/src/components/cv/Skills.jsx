@@ -1,8 +1,8 @@
 export default function Skills({
-    cvData
+    data
 }) {
 
-    if(!cvData.skills) return null;
+    if(!data.skills) return null;
 
     return (
 
@@ -12,7 +12,7 @@ export default function Skills({
 
             <div className="skills-preview">
 
-                {cvData.skills
+                {data.skills
 
                     .split(",")
 
