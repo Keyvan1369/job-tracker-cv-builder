@@ -243,6 +243,7 @@ useEffect(() => {
             <option value="minimal">Minimal</option>
             <option value="creative">Creative</option>
             <option value="executive">Executive</option>
+            <option value="spectrum-pulse">Spectrum Pulse</option>
           </select>
         </div>
 

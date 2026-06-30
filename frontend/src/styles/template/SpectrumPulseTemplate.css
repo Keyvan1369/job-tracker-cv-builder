@@ -1,0 +1,230 @@
+/* کانتینر اصلی رزومه */
+.colored-minimal-template {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  color: #334155;
+  background-color: #fafaf9; /* پس‌زمینه شیری بسیار ملایم */
+  padding: 80px 60px;
+  max-width: 960px;
+  margin: 50px auto;
+  border-radius: 16px;
+  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.05);
+  position: relative;
+}
+
+/* هدر */
+.cm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding-bottom: 35px;
+}
+
+.cm-name {
+  font-size: 44px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin: 0 0 14px 0;
+}
+
+.cm-title-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f766e; /* رنگ سبز یشمی شاخص */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background-color: #ccfbf1; /* پس‌زمینه ملایم ته‌رنگ سبز */
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* اطلاعات تماس */
+.cm-contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.cm-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.cm-icon {
+  color: #0d9488;
+  font-weight: 700;
+}
+
+/* خط جداکننده افقی */
+.cm-divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #0f766e 100px, #e2e8f0 100px);
+  margin-bottom: 45px;
+}
+
+/* گرید اصلی */
+.cm-main-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 50px;
+}
+
+.cm-main-col,
+.cm-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+/* عنوان بخش‌ها */
+.cm-section-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 25px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cm-section-title::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  background-color: #0f766e;
+  border-radius: 2px;
+}
+
+/* کارت خلاصه (Summary) رنگی و متمایز */
+.cm-highlight-section {
+  background-color: #115e59; /* سبز عمیق و لوکس */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(17, 94, 89, 0.1);
+}
+
+.cm-highlight-section p {
+  color: #f0fdfa !important;
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* کارت‌های عادی */
+.cm-section {
+  position: relative;
+}
+
+/* استایل سوابق (Experience & Education) */
+.preview-item {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 30px;
+  border-left: 2px solid #e2e8f0;
+}
+
+/* روشن شدن خط زمان زیر بخش فعلی */
+.preview-item:hover {
+  border-left-color: #0f766e;
+}
+
+.preview-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.preview-item h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.preview-item .date-range {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0f766e;
+  background: #f0fdfa;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.preview-item strong {
+  font-size: 14px;
+  color: #334155;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.preview-item p {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.65;
+}
+
+/* بخش مهارت‌ها */
+.skill-group {
+  margin-bottom: 20px;
+}
+
+.skill-group strong {
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.skill-group span {
+  color: #0f766e;
+  background: #f0fdfa;
+  border: 1px solid #ccfbf1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+/* واکنش‌گرایی موبایل */
+@media (max-width: 850px) {
+  .colored-minimal-template {
+    padding: 40px 20px;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .cm-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .cm-contact-grid {
+    align-items: flex-start;
+  }
+
+  .cm-main-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}

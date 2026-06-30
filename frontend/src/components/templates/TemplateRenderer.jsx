@@ -3,6 +3,7 @@ import MinimalTemplate from "./MinimalTemplate.jsx";
 import ProfessionalTemplate from "./ProfessionalTemplate.jsx";
 import CreativeTemplate from "./CreativeTemplate.jsx";
 import ExecutiveTemplate from "./ExecutiveTemplate.jsx";
+import SpectrumPulseTemplate from "./SpectrumPulseTemplate.jsx";
 
 export default function TemplateRenderer({
     template,
@@ -21,6 +22,9 @@ export default function TemplateRenderer({
             return <CreativeTemplate data={data}/>;
         case "executive":
             return <ExecutiveTemplate data={data} />;
+
+        case "SpectrumPulse":
+            return <SpectrumPulseTemplate data={data} />;
 
         default:
             return <ModernTemplate data={data}/>;
