@@ -12,6 +12,7 @@ export default function CVBuilder() {
 
 
   const [cvData, setCvData] = useState({
+    jobTitle: "",
     fullName: "",
     email: "",
     phone: "",
@@ -83,6 +84,7 @@ export default function CVBuilder() {
       await api.get(`/cvs/${id}`);
 
     setCvData({
+      jobTitle: res.data.jobTitle,
       fullName: res.data.fullName,
       email: res.data.email,
       phone: res.data.phone,
@@ -116,7 +118,12 @@ useEffect(() => {
       <div className="cv-form">
         <h1>CV Builder</h1>
         <p>Create your professional resume</p>
-
+        <input
+          name="jobTitle"
+          placeholder="Job Title"
+          value={cvData.jobTitle}
+          onChange={handleChange}
+        />
         <input
           name="fullName"
           placeholder="Full Name"

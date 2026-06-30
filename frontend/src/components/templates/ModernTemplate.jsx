@@ -11,19 +11,20 @@ export default function ModernTemplate({ data }) {
     <div className="modern-template">
 
      <Header
-    fullName={data.fullName}
-    email={data.email}
-    phone={data.phone}
-    location={data.location}
-/>
+      fullName={data.fullName}
+      jobTitle={data.jobTitle}
+      email={data.email}
+      phone={data.phone}
+      location={data.location}
+      />
 
-<Summary data={data} />
+      <Summary data={data.summary} />
 
-<Skills data={data} />
+      <Experience data={data.experiences} />
 
-<Experience data={data} />
+      <Skills data={data.skills} />
 
-<Education data={data} />
+      <Education data={data.educations} />
     </div>
   );
 }

@@ -10,21 +10,27 @@ export default function ExecutiveTemplate({ data }) {
   return (
     <div className="executive-template">
 
-      <Header
-        fullName={data.fullName}
-        email={data.email}
-        phone={data.phone}
-        location={data.location}
-      />
 
-      <Summary data={data.summary} />
+    <h1>{data.fullName}</h1>
 
-      <Experience data={data.experiences} />
+    <h2>{data.jobTitle}</h2>
 
-      <Skills data={data.skills} />
+    <div className="contact-row">
 
-      <Education data={data.educations} />
+    <span>{data.email}</span>
 
+    <span>{data.phone}</span>
+
+    <span>{data.location}</span>
+
+  </div>
+    <Summary data={data.summary} />
+
+    <Experience data={data.experiences} />
+
+    <Skills data={data.skills} />
+
+    <Education data={data.educations} />
     </div>
   );
 }

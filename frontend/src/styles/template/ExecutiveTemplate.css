@@ -1,57 +1,31 @@
-.executive-template {
-
-    background: white;
-
-    padding: 45px;
-
-    width: 210mm;
-
-    min-height: 297mm;
-
-    color: #1f2937;
-
-    font-family: "Calibri", sans-serif;
-
-    box-sizing: border-box;
-
+.executive-header {
+  background: #0f172a;
+  color: white;
+  padding: 35px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 30px;
 }
 
-.executive-template h1{
-
-    color:#0f172a;
-
-    font-size:36px;
-
-    margin-bottom:5px;
-
+.executive-header h1 {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 1px;
 }
 
-.executive-template h2{
-
-    margin-top:30px;
-
-    padding-bottom:8px;
-
-    border-bottom:3px solid #1e3a8a;
-
-    color:#1e3a8a;
-
+.executive-header h2 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #cbd5e1;
+  border: none;
 }
 
-.executive-template .skill-tag{
-
-    background:#1e3a8a;
-
-    color:white;
-
-    padding:6px 12px;
-
-    border-radius:5px;
-
-    margin:5px;
-
-    display:inline-block;
-
-    font-size:14px;
-
+.contact-row {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  font-size: 14px;
 }
