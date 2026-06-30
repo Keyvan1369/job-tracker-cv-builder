@@ -12,7 +12,6 @@ export default function StatCard({
       sx={{
         borderRadius: 3,
         transition: "0.3s",
-
         "&:hover": {
           transform: "translateY(-6px)",
           boxShadow: 8,
@@ -20,15 +19,14 @@ export default function StatCard({
       }}
     >
       <CardContent>
-
         <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-
           <Box>
-
             <Typography
               color="text.secondary"
               gutterBottom
@@ -42,7 +40,6 @@ export default function StatCard({
             >
               {value}
             </Typography>
-
           </Box>
 
           <Box
@@ -56,9 +53,7 @@ export default function StatCard({
           >
             {icon}
           </Box>
-
         </Box>
-
       </CardContent>
     </Card>
   );
