@@ -3,7 +3,7 @@ import Summary from "../cv/Summary.jsx";
 import Skills from "../cv/Skills.jsx";
 import Experience from "../cv/Experience.jsx";
 import Education from "../cv/Education.jsx";
-
+import Projects from "../cv/Projects.jsx";
 import "../../styles/template/ExecutiveTemplate.css";
 
 export default function ExecutiveTemplate({ data }) {
@@ -46,6 +46,9 @@ export default function ExecutiveTemplate({ data }) {
           </section>
           <section className="section-wrapper">
             <Experience data={data} />
+          </section>
+          <section className="section-wrapper">
+            <Projects data={data} />
           </section>
         </main>
 
