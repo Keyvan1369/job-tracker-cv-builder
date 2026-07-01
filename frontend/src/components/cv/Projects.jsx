@@ -1,22 +1,39 @@
-export default function Projects({ projects }) {
+export default function Projects({
+    data
+}) {
 
-  if (!projects?.length) return null;
+    if(!data.projects?.length)
+        return null;
 
-  return (
-    <>
-      <h2>Projects</h2>
+    return (
 
-      {projects.map((project, index) => (
-        <div key={index} className="preview-item">
+        <>
 
-          <h3>{project.name}</h3>
+            <h2>Projects</h2>
 
-          <strong>{project.technologies}</strong>
+            {data.projects.map((proj,index)=>(
 
-          <p>{project.description}</p>
+                <div
+                    key={index}
+                    className="preview-item"
+                >
 
-        </div>
-      ))}
-    </>
-  );
+                    <h3>{proj.name}</h3>
+
+                    <p>{proj.technologies}</p>
+
+                    <p>{proj.github}</p>
+
+                    <p>{proj.live}</p>
+
+                    <p>{proj.description}</p>
+
+                </div>
+
+            ))}
+
+        </>
+
+    );
+
 }
