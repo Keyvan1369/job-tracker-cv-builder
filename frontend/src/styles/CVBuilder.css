@@ -26,7 +26,7 @@
   min-height: 100vh;
 }
 
-/* بخش فرم ورودی‌ها */
+
 .cv-form {
   background: var(--bg-card);
   padding: 32px;
@@ -91,7 +91,7 @@
   resize: vertical;
 }
 
-/* باکس‌های تکرارشونده تجربه و تحصیلات */
+
 .experience-box {
   border: 1px solid var(--border-color);
   padding: 20px;
@@ -100,17 +100,17 @@
   background: #f8fafc;
 }
 
-/* سایدبار سمت راست (انتخاب قالب + پیش‌نویس) */
+
 .cv-preview-sidebar {
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: sticky;
-  top: 40px; /* قفل شدن سایدبار هنگام اسکرول */
+  top: 40px;
   height: fit-content;
 }
 
-/* استایل بخش انتخاب قالب */
+
 .template-selector {
   background: var(--bg-card);
   padding: 16px 24px;
@@ -144,7 +144,7 @@
   border-color: var(--primary);
 }
 
-/* بخش پیش‌نمایش نهایی */
+
 .cv-preview {
   background: var(--bg-card);
   padding: 40px;
@@ -152,7 +152,7 @@
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
   color: #334155;
-  min-height: 600px; /* ایجاد یک اندازه اولیه استاندارد */
+  min-height: 600px;
 }
 
 /* دکمه‌های افزودن آیتم جدید */
@@ -180,7 +180,7 @@
 .action-buttons {
   display: flex;
   gap: 16px;
-  margin-top: 24px;
+  margin-top: 20px; /* از استایل خطی منتقل شد */
 }
 
 .download-btn, .save-btn {
