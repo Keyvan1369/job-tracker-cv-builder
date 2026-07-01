@@ -35,6 +35,15 @@ const cvSchema = new mongoose.Schema(
         year: String,
       },
     ],
+    projects: [
+  {
+    name: String,
+    technologies: String,
+    github: String,
+    live: String,
+    description: String,
+  },
+],
   },
   {
     timestamps: true,
