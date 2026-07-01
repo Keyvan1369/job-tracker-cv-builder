@@ -3,7 +3,7 @@ import Summary from "../cv/Summary.jsx";
 import Skills from "../cv/Skills.jsx";
 import Experience from "../cv/Experience.jsx";
 import Education from "../cv/Education.jsx";
-
+import Projects from "../cv/Projects.jsx";
 import "../../styles/template/MinimalTemplate.css";
 
 export default function MinimalTemplate({ data }) {
@@ -27,6 +27,7 @@ export default function MinimalTemplate({ data }) {
         <Experience data={data} />
         <Skills data={data} />
         <Education data={data} />
+        <Projects data={data} />
       </main>
     </div>
   );

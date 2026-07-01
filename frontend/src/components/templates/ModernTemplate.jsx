@@ -29,6 +29,7 @@ export default function ModernTemplate({ data }) {
               <Skills data={data} />
               <Projects  data={data} />
               <Education data={data} />
+              <Projects data={data} />
             </main>
           </div>
   );

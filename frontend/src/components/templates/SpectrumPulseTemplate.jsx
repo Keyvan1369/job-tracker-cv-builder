@@ -3,15 +3,16 @@ import Summary from "../cv/Summary.jsx";
 import Skills from "../cv/Skills.jsx";
 import Experience from "../cv/Experience.jsx";
 import Education from "../cv/Education.jsx";
-
+import Projects from "../cv/Projects.jsx";
 import "../../styles/template/SpectrumPulseTemplate.css";
+
 
 export default function SpectrumPulseTemplate({ data }) {
   if (!data) return null;
 
   return (
     <div className="colored-minimal-template">
-      {/* هدر با المان‌های رنگی ظریف */}
+
       <header className="cm-header">
         <div className="cm-profile">
           <h1 className="cm-name">{data.fullName}</h1>
@@ -40,11 +41,11 @@ export default function SpectrumPulseTemplate({ data }) {
         </div>
       </header>
 
-      {/* خط جداکننده دو رنگ */}
+
       <div className="cm-divider"></div>
 
       <div className="cm-main-layout">
-        {/* ستون سمت چپ */}
+
         <div className="cm-main-col">
           <section className="cm-section cm-highlight-section">
             <Summary data={data} />
@@ -56,7 +57,7 @@ export default function SpectrumPulseTemplate({ data }) {
           </section>
         </div>
 
-        {/* ستون سمت راست */}
+
         <div className="cm-sidebar-col">
           <section className="cm-section cm-sidebar-card">
             <h2 className="cm-section-title">Skills</h2>
@@ -66,6 +67,11 @@ export default function SpectrumPulseTemplate({ data }) {
           <section className="cm-section cm-sidebar-card">
             <h2 className="cm-section-title">Education</h2>
             <Education data={data} />
+          </section>
+
+          <section className="cm-section cm-sidebar-card">
+            <h2 className="cm-section-title">Projects</h2>
+            <Projects data={data} />
           </section>
         </div>
       </div>

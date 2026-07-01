@@ -2,8 +2,9 @@ import Summary from "../cv/Summary.jsx";
 import Skills from "../cv/Skills.jsx";
 import Experience from "../cv/Experience.jsx";
 import Education from "../cv/Education.jsx";
-
+import Projects from "../cv/Projects.jsx";
 import "../../styles/template/ProfessionalTemplate.css";
+
 
 export default function ProfessionalTemplate({ data }) {
   if (!data) return null;
@@ -28,6 +29,7 @@ export default function ProfessionalTemplate({ data }) {
         <Summary data={data} />
         <Experience data={data} />
         <Education data={data} />
+        <Projects data={data} />
       </main>
     </div>
   );
