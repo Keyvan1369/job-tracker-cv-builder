@@ -1,0 +1,29 @@
+.ui-section{
+
+    margin-bottom:30px;
+
+}
+.ui-section-title{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+    color:#0f172a;
+
+    border-left:5px solid #38bdf8;
+
+    padding-left:12px;
+
+}
+.ui-section-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
