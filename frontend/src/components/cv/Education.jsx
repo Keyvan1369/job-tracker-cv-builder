@@ -9,7 +9,7 @@ export default function Education({
 
         <>
 
-            <h2>Education</h2>
+            
 
             {data.educations.map((edu,index)=>(
 
