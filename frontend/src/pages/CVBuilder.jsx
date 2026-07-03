@@ -226,6 +226,7 @@ export default function CVBuilder() {
             <option value="creative">Creative</option>
             <option value="executive">Executive</option>
             <option value="spectrum-pulse">Spectrum Pulse</option>
+            <option value="developer">Developer Neon</option>
           </select>
         </div>
 
