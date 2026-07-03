@@ -1,27 +1,24 @@
-export default function Header({
-  fullName,
-  jobTitle,
-  email,
-  phone,
-  location,
-  GitHub,
-  LinkedIn,
-  Portfolio
-}) {
+export default function Header({ data }) {
+  if (!data) return null;
+
   return (
     <div className="cv-header">
-      <h1>{fullName || "Your Name"}</h1>
+      <h1>{data.fullName || "Your Name"}</h1>
+      {data.jobTitle && <h2>{data.jobTitle}</h2>}
 
       <p>
-        {email}
-        {email && phone && " | "}
-        {phone}
+        {data.email}
+        {data.email && data.phone && " | "}
+        {data.phone}
       </p>
 
-      <p>{location}</p>
-      <p>{GitHub}</p>
-      <p>{LinkedIn}</p>
-      <p>{Portfolio}</p>
+      {data.location && <p>{data.location}</p>}
+
+      <div className="header-socials">
+        {data.github && <p>GitHub: {data.github}</p>}
+        {data.linkedin && <p>LinkedIn: {data.linkedin}</p>}
+        {data.portfolio && <p>Portfolio: {data.portfolio}</p>}
+      </div>
     </div>
   );
 }
