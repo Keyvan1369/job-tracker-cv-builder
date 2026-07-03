@@ -18,9 +18,14 @@ export default function CVBuilder() {
     location: "",
     summary: "",
     skills: "",
+    github: "",
+    linkedin: "",
+    portfolio: "",
     experiences: [{ company: "", position: "", period: "", description: "" }],
     educations: [{ school: "", degree: "", year: "" }],
     projects: [{ name: "", technologies: "", github: "", live: "", description: "" }],
+    languages: [],
+    certifications: [],
   });
 
   const [template, setTemplate] = useState("modern");
@@ -48,24 +53,39 @@ export default function CVBuilder() {
     });
   };
 
+  const removeItem = (section, index) => {
+    const updated = cvData[section].filter((_, i) => i !== index);
+    setCvData({
+      ...cvData,
+      [section]: updated,
+    });
+  };
+
   const downloadPDF = async () => {
     if (!cvRef.current) return;
-    const canvas = await html2canvas(cvRef.current, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    try {
+      const canvas = await html2canvas(cvRef.current, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(`${cvData.fullName || "resume"}.pdf`);
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${cvData.fullName || "resume"}.pdf`);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Failed to download PDF");
+    }
   };
 
   const saveCV = async () => {
     try {
-      const res = await api.post("/cvs", {
-        ...cvData,
-        template,
-      });
+      let res;
+      if (id) {
+        res = await api.put(`/cvs/${id}`, { ...cvData, template });
+      } else {
+        res = await api.post("/cvs", { ...cvData, template });
+      }
       console.log(res.data);
       alert("CV saved successfully!");
     } catch (error) {
@@ -78,28 +98,34 @@ export default function CVBuilder() {
   const fetchCV = async () => {
     try {
       const res = await api.get(`/cvs/${id}`);
+      const data = res.data;
 
       setCvData({
-        jobTitle: res.data.jobTitle || "",
-        fullName: res.data.fullName || "",
-        email: res.data.email || "",
-        phone: res.data.phone || "",
-        location: res.data.location || "",
-        summary: res.data.summary || "",
-        skills: res.data.skills || "",
-        experiences: res.data.experiences && res.data.experiences.length > 0
-          ? res.data.experiences
+        jobTitle: data.jobTitle || "",
+        fullName: data.fullName || "",
+        email: data.email || "",
+        phone: data.phone || "",
+        location: data.location || "",
+        summary: data.summary || "",
+        skills: data.skills || "",
+        github: data.github || "",
+        linkedin: data.linkedin || "",
+        portfolio: data.portfolio || "",
+        experiences: data.experiences && data.experiences.length > 0
+          ? data.experiences
           : [{ company: "", position: "", period: "", description: "" }],
-        educations: res.data.educations && res.data.educations.length > 0
-          ? res.data.educations
+        educations: data.educations && data.educations.length > 0
+          ? data.educations
           : [{ school: "", degree: "", year: "" }],
-        projects: res.data.projects && res.data.projects.length > 0
-          ? res.data.projects
+        projects: data.projects && data.projects.length > 0
+          ? data.projects
           : [{ name: "", technologies: "", github: "", live: "", description: "" }],
+        languages: data.languages || [],
+        certifications: data.certifications || [],
       });
 
-      if (res.data.template) {
-        setTemplate(res.data.template);
+      if (data.template) {
+        setTemplate(data.template);
       }
     } catch (error) {
       console.error("Error fetching CV:", error);
@@ -118,6 +144,7 @@ export default function CVBuilder() {
         <h1>CV Builder</h1>
         <p>Create your professional resume</p>
 
+        <h3>Personal Information</h3>
         <input name="jobTitle" placeholder="Job Title" value={cvData.jobTitle} onChange={handleChange} />
         <input name="fullName" placeholder="Full Name" value={cvData.fullName} onChange={handleChange} />
         <input name="email" placeholder="Email" value={cvData.email} onChange={handleChange} />
@@ -126,6 +153,11 @@ export default function CVBuilder() {
         <textarea name="summary" placeholder="Professional Summary" value={cvData.summary} onChange={handleChange} />
         <input name="skills" placeholder="React, Node.js, MongoDB..." value={cvData.skills} onChange={handleChange} />
 
+        <h3>Links & Socials</h3>
+        <input name="github" placeholder="GitHub Profile URL" value={cvData.github} onChange={handleChange} />
+        <input name="linkedin" placeholder="LinkedIn Profile URL" value={cvData.linkedin} onChange={handleChange} />
+        <input name="portfolio" placeholder="Portfolio Website URL" value={cvData.portfolio} onChange={handleChange} />
+
         <h2>Experience</h2>
         {cvData.experiences.map((exp, index) => (
           <div className="experience-box" key={index}>
@@ -133,6 +165,9 @@ export default function CVBuilder() {
             <input placeholder="Position" value={exp.position} onChange={(e) => handleNestedChange(index, "experiences", "position", e.target.value)} />
             <input placeholder="Period" value={exp.period} onChange={(e) => handleNestedChange(index, "experiences", "period", e.target.value)} />
             <textarea placeholder="Description" value={exp.description} onChange={(e) => handleNestedChange(index, "experiences", "description", e.target.value)} />
+            {cvData.experiences.length > 1 && (
+              <button type="button" className="remove-btn" onClick={() => removeItem("experiences", index)}>Delete</button>
+            )}
           </div>
         ))}
         <button type="button" className="add-btn" onClick={() => addItem("experiences", { company: "", position: "", period: "", description: "" })}>
@@ -145,6 +180,9 @@ export default function CVBuilder() {
             <input placeholder="School" value={edu.school} onChange={(e) => handleNestedChange(index, "educations", "school", e.target.value)} />
             <input placeholder="Degree" value={edu.degree} onChange={(e) => handleNestedChange(index, "educations", "degree", e.target.value)} />
             <input placeholder="Year" value={edu.year} onChange={(e) => handleNestedChange(index, "educations", "year", e.target.value)} />
+            {cvData.educations.length > 1 && (
+              <button type="button" className="remove-btn" onClick={() => removeItem("educations", index)}>Delete</button>
+            )}
           </div>
         ))}
         <button type="button" className="add-btn" onClick={() => addItem("educations", { school: "", degree: "", year: "" })}>
@@ -159,6 +197,9 @@ export default function CVBuilder() {
             <input placeholder="GitHub URL" value={project.github} onChange={(e) => handleNestedChange(index, "projects", "github", e.target.value)} />
             <input placeholder="Live Demo URL" value={project.live} onChange={(e) => handleNestedChange(index, "projects", "live", e.target.value)} />
             <textarea placeholder="Project Description" value={project.description} onChange={(e) => handleNestedChange(index, "projects", "description", e.target.value)} />
+            {cvData.projects.length > 1 && (
+              <button type="button" className="remove-btn" onClick={() => removeItem("projects", index)}>Delete</button>
+            )}
           </div>
         ))}
         <button type="button" className="add-btn" onClick={() => addItem("projects", { name: "", technologies: "", github: "", live: "", description: "" })}>
