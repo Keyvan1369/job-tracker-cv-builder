@@ -1,7 +1,6 @@
 import Card from "../ui/Card.jsx";
 import Section from "../ui/Section.jsx";
 import Badge from "../ui/Badge.jsx";
-
 import Header from "../cv/Header.jsx";
 import Summary from "../cv/Summary.jsx";
 import Skills from "../cv/Skills.jsx";
@@ -18,7 +17,7 @@ export default function DeveloperTemplate({ data }) {
   return (
     <div className="developer-template">
 
-      <Header cvData={data}/>
+      <Header data={data}/>
 
       <div className="developer-grid">
 
