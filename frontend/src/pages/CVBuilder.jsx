@@ -4,6 +4,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
 import TemplateRenderer from "../components/templates/TemplateRenderer.jsx";
+import TemplateGallery from "../components/templates/TemplateGallery.jsx";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -228,6 +229,7 @@ export default function CVBuilder() {
             <option value="spectrum-pulse">Spectrum Pulse</option>
             <option value="developer">Developer Neon</option>
           </select>
+          <TemplateGallery template={template}setTemplate={setTemplate}/>
         </div>
 
         <div className="cv-preview" ref={cvRef}>
