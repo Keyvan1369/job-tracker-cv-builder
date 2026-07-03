@@ -1,0 +1,35 @@
+.developer-template{
+
+    padding:40px;
+
+}
+
+.developer-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 2fr;
+
+    gap:24px;
+
+}
+
+.developer-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.developer-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
