@@ -1,8 +1,12 @@
 export default function Header({
   fullName,
+  jobTitle,
   email,
   phone,
   location,
+  GitHub,
+  LinkedIn,
+  Portfolio
 }) {
   return (
     <div className="cv-header">
@@ -15,6 +19,9 @@ export default function Header({
       </p>
 
       <p>{location}</p>
+      <p>{GitHub}</p>
+      <p>{LinkedIn}</p>
+      <p>{Portfolio}</p>
     </div>
   );
 }
