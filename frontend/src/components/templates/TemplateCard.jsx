@@ -1,25 +1,29 @@
 import "../../styles/template/TemplateCard.css";
 
 export default function TemplateCard({
-  name,
-  preview,
-  isActive,
+  title,
+  image,
+  active = false,
+  badge = "",
   onClick,
-  badge,
 }) {
   return (
     <div
-      className={`template-card ${isActive ? "active" : ""}`}
+      className={`template-card ${active ? "active" : ""}`}
       onClick={onClick}
     >
-      <div className="template-preview">
-        <img src={preview} alt={name} />
+      <div className="template-image">
+        <img src={image} alt={title} />
       </div>
 
-      <div className="template-info">
-        <h3>{name}</h3>
+      <div className="template-footer">
+        <h3>{title}</h3>
 
-        {badge && <span className="template-badge">{badge}</span>}
+        {badge && (
+          <span className="template-badge">
+            {badge}
+          </span>
+        )}
       </div>
     </div>
   );

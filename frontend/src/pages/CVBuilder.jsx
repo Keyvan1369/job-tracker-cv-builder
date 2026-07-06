@@ -229,11 +229,18 @@ export default function CVBuilder() {
             <option value="spectrum-pulse">Spectrum Pulse</option>
             <option value="developer">Developer Neon</option>
           </select>
-          <TemplateGallery template={template}setTemplate={setTemplate}/>
+          <TemplateGallery template={template} setTemplate={setTemplate}/>
         </div>
 
-        <div className="cv-preview" ref={cvRef}>
-          <TemplateRenderer template={template} data={cvData} />
+        <div
+          key={template}
+          className="cv-preview fade-preview"
+          ref={cvRef}
+        >
+          <TemplateRenderer
+            template={template}
+            data={cvData}
+          />
         </div>
       </div>
     </div>
