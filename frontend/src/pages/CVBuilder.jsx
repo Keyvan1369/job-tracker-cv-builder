@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import api from "../services/api";
 import TemplateRenderer from "../components/templates/TemplateRenderer.jsx";
 import TemplateGallery from "../components/templates/TemplateGallery.jsx";
+import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -152,13 +153,7 @@ export default function CVBuilder() {
         <p>Create your professional resume</p>
 
         <h3>Personal Information</h3>
-        <input name="jobTitle" placeholder="Job Title" value={cvData.jobTitle} onChange={handleChange} />
-        <input name="fullName" placeholder="Full Name" value={cvData.fullName} onChange={handleChange} />
-        <input name="email" placeholder="Email" value={cvData.email} onChange={handleChange} />
-        <input name="phone" placeholder="Phone" value={cvData.phone} onChange={handleChange} />
-        <input name="location" placeholder="Location" value={cvData.location} onChange={handleChange} />
-        <textarea name="summary" placeholder="Professional Summary" value={cvData.summary} onChange={handleChange} />
-        <input name="skills" placeholder="React, Node.js, MongoDB..." value={cvData.skills} onChange={handleChange} />
+        <PersonalInfoForm cvData={cvData} handleChange={handleChange}/>
 
         <h3>Links & Socials</h3>
         <input name="github" placeholder="GitHub Profile URL" value={cvData.github} onChange={handleChange} />
