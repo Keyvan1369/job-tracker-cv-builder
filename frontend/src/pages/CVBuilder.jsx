@@ -37,6 +37,12 @@ export default function CVBuilder() {
       [e.target.name]: e.target.value,
     });
   };
+  const [previewKey, setPreviewKey] = useState(0);
+
+  const handleTemplateChange = (newTemplate) => {
+  setTemplate(newTemplate);
+  setPreviewKey((prev) => prev + 1);
+  };
 
   const handleNestedChange = (index, section, field, value) => {
     const updated = [...cvData[section]];
@@ -229,7 +235,7 @@ export default function CVBuilder() {
             <option value="spectrum-pulse">Spectrum Pulse</option>
             <option value="developer">Developer Neon</option>
           </select>
-          <TemplateGallery template={template} setTemplate={setTemplate}/>
+          <TemplateGallery template={template}onTemplateChange={handleTemplateChange}data={cvData}/>
         </div>
 
         <div

@@ -1,8 +1,10 @@
 import "../../styles/template/TemplateCard.css";
+import TemplatePreview from "./TemplatePreview";
 
 export default function TemplateCard({
   title,
-  image,
+  template,
+  data,
   active = false,
   badge = "",
   onClick,
@@ -12,9 +14,10 @@ export default function TemplateCard({
       className={`template-card ${active ? "active" : ""}`}
       onClick={onClick}
     >
-      <div className="template-image">
-        <img src={image} alt={title} />
-      </div>
+      <TemplatePreview
+        template={template}
+        data={data}
+      />
 
       <div className="template-footer">
         <h3>{title}</h3>

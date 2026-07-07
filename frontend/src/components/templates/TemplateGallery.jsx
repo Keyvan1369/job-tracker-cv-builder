@@ -1,35 +1,32 @@
-import TemplateCard from "./TemplateCard.jsx";
+import "../../styles/template/TemplateGallery.css";
+import TemplateCard from "./TemplateCard";
 
 export default function TemplateGallery({
   template,
-  setTemplate,
+  onTemplateChange,
+  data,
 }) {
   const templates = [
     {
       id: "modern",
       name: "Modern",
-      preview: "/templates/modern.png",
     },
     {
       id: "developer",
-      name: "Developer Neon",
-      preview: "/templates/dev.png",
+      name: "Developer",
       badge: "NEW",
     },
     {
       id: "professional",
       name: "Professional",
-      preview: "/templates/pro.png",
     },
     {
       id: "creative",
       name: "Creative",
-      preview: "/templates/creative.png",
     },
     {
       id: "executive",
       name: "Executive",
-      preview: "/templates/executive.png",
     },
   ];
 
@@ -38,11 +35,12 @@ export default function TemplateGallery({
       {templates.map((t) => (
         <TemplateCard
           key={t.id}
-          name={t.name}
-          preview={t.preview}
+          title={t.name}
+          template={t.id}
+          data={data}
           badge={t.badge}
-          isActive={template === t.id}
-          onClick={() => setTemplate(t.id)}
+          active={template === t.id}
+          onClick={() => onTemplateChange(t.id)}
         />
       ))}
     </div>
