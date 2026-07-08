@@ -10,7 +10,7 @@ export const askAI = async (
 
   const response = await axios.post(
 
-    `${API}/api/ai`,
+    `${API}/ai`,
 
     {
       action,
