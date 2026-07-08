@@ -12,6 +12,7 @@ import SkillsForm from "../components/cvbuilder/SkillsForm";
 import ExperienceForm from "../components/cvbuilder/ExperienceForm";
 import EducationForm from "../components/cvbuilder/EducationForm";
 import ProjectsForm from "../components/cvbuilder/ProjectsForm";
+import LanguagesForm from "../components/cvbuilder/LanguagesForm";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -178,6 +179,10 @@ export default function CVBuilder() {
 
         <h2>Projects</h2>
         <ProjectsForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+
+        <h2>Languages</h2>
+        <LanguagesForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+
 
         <div className="action-buttons">
           <button className="download-btn" onClick={downloadPDF}>
