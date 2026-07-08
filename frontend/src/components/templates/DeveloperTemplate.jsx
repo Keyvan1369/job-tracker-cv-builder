@@ -8,6 +8,8 @@ import Experience from "../cv/Experience.jsx";
 import Education from "../cv/Education.jsx";
 import Projects from "../cv/Projects.jsx";
 import Languages from "../cv/Languages.jsx";
+import Certifications from "../cv/Certifications.jsx";
+
 
 import "../../styles/template/DeveloperTemplate.css";
 
@@ -84,6 +86,15 @@ export default function DeveloperTemplate({ data }) {
             <Section title="Language">
 
               <Languages data={data} />
+
+            </Section>
+
+          </Card>
+          <Card>
+
+            <Section title="Certifications">
+
+              <Certifications data={data} />
 
             </Section>
 
