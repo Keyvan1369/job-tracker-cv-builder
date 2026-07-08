@@ -6,6 +6,7 @@ import api from "../services/api";
 import TemplateRenderer from "../components/templates/TemplateRenderer.jsx";
 import TemplateGallery from "../components/templates/TemplateGallery.jsx";
 import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm";
+import SocialLinksForm from "../components/cvbuilder/SocialLinksForm";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -156,9 +157,7 @@ export default function CVBuilder() {
         <PersonalInfoForm cvData={cvData} handleChange={handleChange}/>
 
         <h3>Links & Socials</h3>
-        <input name="github" placeholder="GitHub Profile URL" value={cvData.github} onChange={handleChange} />
-        <input name="linkedin" placeholder="LinkedIn Profile URL" value={cvData.linkedin} onChange={handleChange} />
-        <input name="portfolio" placeholder="Portfolio Website URL" value={cvData.portfolio} onChange={handleChange} />
+        <SocialLinksForm cvData={cvData} handleChange={handleChange}/>
 
         <h2>Experience</h2>
         {cvData.experiences.map((exp, index) => (
