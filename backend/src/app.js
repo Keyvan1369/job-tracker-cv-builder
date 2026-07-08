@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.routes.js";
 import jobsRoutes from "./routes/jobs.routes.js";
 import cvRoutes from "./routes/cv.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
+import aiRoutes from "./routes/ai.routes.js";
 
 const app = express();
 
@@ -22,5 +23,7 @@ app.use("/api/jobs", jobsRoutes);
 app.use("/api/cvs", cvRoutes);
 
 app.use("/api/dashboard", dashboardRoutes);
+
+app.use("/api/ai", aiRoutes);
 
 export default app;
