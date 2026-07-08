@@ -141,7 +141,7 @@ export default function CVBuilder() {
           : [{ language: "", level: "" }],
 
         certifications: data.certifications && data.certifications.length > 0
-          ? data.certifications
+        ? data.certifications
           : [{ name: "", issuer: "", year: "" }],
       });
 

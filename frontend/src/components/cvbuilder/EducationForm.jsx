@@ -6,6 +6,7 @@ export default function EducationForm({
   return (
     <>
       
+
       {cvData.educations.map((edu, index) => (
         <div className="experience-box" key={index}>
           <input
