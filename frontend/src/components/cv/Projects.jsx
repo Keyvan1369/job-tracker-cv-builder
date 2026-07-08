@@ -24,7 +24,7 @@ export default function Projects({
 
                     <p>{proj.github}</p>
 
-                    <p>{proj.live}</p>
+                    <p>{proj.demo}</p>
 
                     <p>{proj.description}</p>
 
