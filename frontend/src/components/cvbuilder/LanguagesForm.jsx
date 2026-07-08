@@ -3,38 +3,53 @@ export default function LanguagesForm({
   handleNestedChange,
   addItem,
 }) {
+  const languagesList = cvData?.languages || [];
+
   return (
     <>
-      
-      {cvData.languages.map((lang, index) => (
-        <div className="experience-box" key={index}>
+      {languagesList.length === 0 ? (
+        <div className="experience-box">
           <input
             placeholder="Language"
-            value={lang.language}
+            value=""
             onChange={(e) =>
-              handleNestedChange(
-                index,
-                "languages",
-                "language",
-                e.target.value
-              )
+              handleNestedChange(0, "languages", "language", e.target.value)
             }
           />
-
           <input
             placeholder="Level"
-            value={lang.level}
+            value=""
             onChange={(e) =>
-              handleNestedChange(
-                index,
-                "languages",
-                "level",
-                e.target.value
-              )
+              handleNestedChange(0, "languages", "level", e.target.value)
             }
           />
         </div>
-      ))}
+      ) : (
+        languagesList.map((lang, index) => (
+          <div className="experience-box" key={index}>
+            <input
+              placeholder="Language"
+              value={lang.language || ""}
+              onChange={(e) =>
+                handleNestedChange(
+                  index,
+                  "languages",
+                  "language",
+                  e.target.value
+                )
+              }
+            />
+
+            <input
+              placeholder="Level"
+              value={lang.level || ""}
+              onChange={(e) =>
+                handleNestedChange(index, "languages", "level", e.target.value)
+              }
+            />
+          </div>
+        ))
+      )}
 
       <button
         type="button"
