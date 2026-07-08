@@ -33,7 +33,9 @@ export default function CVBuilder() {
     experiences: [{ company: "", position: "", period: "", description: "" }],
     educations: [{ school: "", degree: "", year: "" }],
     projects: [{ name: "", technologies: "", github: "", live: "", description: "" }],
-    languages: [],
+    languages: [
+    { language: "English", level: "Fluent" }
+    ],
     certifications: [],
   });
 
