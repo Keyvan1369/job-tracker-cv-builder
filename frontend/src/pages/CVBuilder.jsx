@@ -136,8 +136,13 @@ export default function CVBuilder() {
         projects: data.projects && data.projects.length > 0
           ? data.projects
           : [{ name: "", technologies: "", github: "", live: "", description: "" }],
-        languages: data.languages || [ {language: "",level: ""}],
-        certifications: data.certifications || [{name: "",issuer: "",year: ""}],
+        languages: data.languages && data.languages.length > 0
+          ? data.languages
+          : [{ language: "", level: "" }],
+
+        certifications: data.certifications && data.certifications.length > 0
+          ? data.certifications
+          : [{ name: "", issuer: "", year: "" }],
       });
 
       if (data.template) {

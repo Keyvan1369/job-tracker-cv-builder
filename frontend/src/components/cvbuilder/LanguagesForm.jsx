@@ -7,49 +7,25 @@ export default function LanguagesForm({
 
   return (
     <>
-      {languagesList.length === 0 ? (
-        <div className="experience-box">
+      {languagesList.map((lang, index) => (
+        <div className="experience-box" key={index}>
           <input
             placeholder="Language"
-            value=""
+            value={lang.language || ""}
             onChange={(e) =>
-              handleNestedChange(0, "languages", "language", e.target.value)
+              handleNestedChange(index, "languages", "language", e.target.value)
             }
           />
+
           <input
             placeholder="Level"
-            value=""
+            value={lang.level || ""}
             onChange={(e) =>
-              handleNestedChange(0, "languages", "level", e.target.value)
+              handleNestedChange(index, "languages", "level", e.target.value)
             }
           />
         </div>
-      ) : (
-        languagesList.map((lang, index) => (
-          <div className="experience-box" key={index}>
-            <input
-              placeholder="Language"
-              value={lang.language || ""}
-              onChange={(e) =>
-                handleNestedChange(
-                  index,
-                  "languages",
-                  "language",
-                  e.target.value
-                )
-              }
-            />
-
-            <input
-              placeholder="Level"
-              value={lang.level || ""}
-              onChange={(e) =>
-                handleNestedChange(index, "languages", "level", e.target.value)
-              }
-            />
-          </div>
-        ))
-      )}
+      ))}
 
       <button
         type="button"

@@ -3,47 +3,33 @@ export default function CertificationsForm({
   handleNestedChange,
   addItem,
 }) {
+  const certificationsList = cvData?.certifications || [];
+
   return (
     <>
-
-      {cvData.certifications.map((cert, index) => (
+      {certificationsList.map((cert, index) => (
         <div className="experience-box" key={index}>
           <input
             placeholder="Certificate Name"
-            value={cert.name}
+            value={cert.name || ""}
             onChange={(e) =>
-              handleNestedChange(
-                index,
-                "certifications",
-                "name",
-                e.target.value
-              )
+              handleNestedChange(index, "certifications", "name", e.target.value)
             }
           />
 
           <input
             placeholder="Issuer"
-            value={cert.issuer}
+            value={cert.issuer || ""}
             onChange={(e) =>
-              handleNestedChange(
-                index,
-                "certifications",
-                "issuer",
-                e.target.value
-              )
+              handleNestedChange(index, "certifications", "issuer", e.target.value)
             }
           />
 
           <input
             placeholder="Year"
-            value={cert.year}
+            value={cert.year || ""}
             onChange={(e) =>
-              handleNestedChange(
-                index,
-                "certifications",
-                "year",
-                e.target.value
-              )
+              handleNestedChange(index, "certifications", "year", e.target.value)
             }
           />
         </div>
