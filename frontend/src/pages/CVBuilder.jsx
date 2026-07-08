@@ -8,6 +8,7 @@ import TemplateGallery from "../components/templates/TemplateGallery.jsx";
 import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm";
 import SocialLinksForm from "../components/cvbuilder/SocialLinksForm";
 import SummaryForm from "../components/cvbuilder/SummaryForm";
+import SkillsForm from "../components/cvbuilder/SkillsForm";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -159,6 +160,9 @@ export default function CVBuilder() {
 
         <h3>Links & Socials</h3>
         <SocialLinksForm cvData={cvData} handleChange={handleChange}/>
+
+        <h3>Skills</h3>
+        <SkillsForm cvData={cvData}handleChange={handleChange}/>
 
         <h3>Summary</h3>
         <SummaryForm cvData={cvData}handleChange={handleChange}/>
