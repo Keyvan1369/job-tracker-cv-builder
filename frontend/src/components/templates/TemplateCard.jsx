@@ -1,5 +1,5 @@
 import "../../styles/template/TemplateCard.css";
-import TemplatePreview from "./TemplatePreview";
+import TemplatePreview from "./TemplatePreview.jsx";
 
 export default function TemplateCard({
   title,

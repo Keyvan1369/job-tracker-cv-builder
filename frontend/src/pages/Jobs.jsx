@@ -53,7 +53,7 @@ export default function Jobs() {
   const deleteJob = async (id) => {
     try {
       await api.delete(`/jobs/${id}`);
-      setJobs(jobs.filter((job) => job._id !== id)); // اصلاح شد: _id
+      setJobs(jobs.filter((job) => job._id !== id));
     } catch (error) {
       console.log(error);
     }

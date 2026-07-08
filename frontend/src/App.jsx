@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Jobs from "./pages/Jobs";
-import Layout from "./components/Layout";
-import Landing from "./pages/Landing";
-import CVBuilder from "./pages/CVBuilder";
-import MyCVs from "./pages/MyCVs";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Jobs from "./pages/Jobs.jsx";
+import Layout from "./components/Layout.jsx";
+import Landing from "./pages/Landing.jsx";
+import CVBuilder from "./pages/CVBuilder.jsx";
+import MyCVs from "./pages/MyCVs.jsx";
 
 
 function App() {

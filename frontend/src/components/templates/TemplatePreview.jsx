@@ -1,4 +1,4 @@
-import TemplateRenderer from "./TemplateRenderer";
+import TemplateRenderer from "./TemplateRenderer.jsx";
 import "../../styles/template/TemplatePreview.css";
 
 export default function TemplatePreview({

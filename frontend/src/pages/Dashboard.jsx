@@ -11,9 +11,9 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-import Sidebar from "../components/layout/Sidebar";
-import Topbar from "../components/layout/Topbar";
-import StatCard from "../components/dashboard/StatCard";
+import Sidebar from "../components/layout/Sidebar.jsx";
+import Topbar from "../components/layout/Topbar.jsx";
+import StatCard from "../components/dashboard/StatCard.jsx";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {

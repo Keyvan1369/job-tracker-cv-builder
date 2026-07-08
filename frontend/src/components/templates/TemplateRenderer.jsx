@@ -4,7 +4,7 @@ import ProfessionalTemplate from "./ProfessionalTemplate.jsx";
 import CreativeTemplate from "./CreativeTemplate.jsx";
 import ExecutiveTemplate from "./ExecutiveTemplate.jsx";
 import SpectrumPulseTemplate from "./SpectrumPulseTemplate.jsx";
-import DeveloperTemplate from "./DeveloperTemplate";
+import DeveloperTemplate from "./DeveloperTemplate.jsx";
 
 export default function TemplateRenderer({
     template,

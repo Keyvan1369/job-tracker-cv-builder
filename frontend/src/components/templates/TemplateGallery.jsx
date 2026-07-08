@@ -1,5 +1,5 @@
 import "../../styles/template/TemplateGallery.css";
-import TemplateCard from "./TemplateCard";
+import TemplateCard from "./TemplateCard.jsx";
 
 export default function TemplateGallery({
   template,
