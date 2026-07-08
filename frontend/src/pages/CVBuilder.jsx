@@ -11,6 +11,7 @@ import SummaryForm from "../components/cvbuilder/SummaryForm";
 import SkillsForm from "../components/cvbuilder/SkillsForm";
 import ExperienceForm from "../components/cvbuilder/ExperienceForm";
 import EducationForm from "../components/cvbuilder/EducationForm";
+import ProjectsForm from "../components/cvbuilder/ProjectsForm";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -176,21 +177,7 @@ export default function CVBuilder() {
        <EducationForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
 
         <h2>Projects</h2>
-        {cvData.projects.map((project, index) => (
-          <div className="experience-box" key={index}>
-            <input placeholder="Project Name" value={project.name} onChange={(e) => handleNestedChange(index, "projects", "name", e.target.value)} />
-            <input placeholder="Technologies" value={project.technologies} onChange={(e) => handleNestedChange(index, "projects", "technologies", e.target.value)} />
-            <input placeholder="GitHub URL" value={project.github} onChange={(e) => handleNestedChange(index, "projects", "github", e.target.value)} />
-            <input placeholder="Live Demo URL" value={project.live} onChange={(e) => handleNestedChange(index, "projects", "live", e.target.value)} />
-            <textarea placeholder="Project Description" value={project.description} onChange={(e) => handleNestedChange(index, "projects", "description", e.target.value)} />
-            {cvData.projects.length > 1 && (
-              <button type="button" className="remove-btn" onClick={() => removeItem("projects", index)}>Delete</button>
-            )}
-          </div>
-        ))}
-        <button type="button" className="add-btn" onClick={() => addItem("projects", { name: "", technologies: "", github: "", live: "", description: "" })}>
-          + Add Project
-        </button>
+        <ProjectsForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
 
         <div className="action-buttons">
           <button className="download-btn" onClick={downloadPDF}>
