@@ -1,4 +1,4 @@
-import { askAI } from "../services/ai.service.js";
+import { askAI } from "../services/ai/provider.js";
 import { resumeScorePrompt } from "../prompts/resumeScore.prompt.js";
 
 export const aiEngine = async (req, res) => {
