@@ -7,8 +7,10 @@ import Skills from "../cv/Skills.jsx";
 import Experience from "../cv/Experience.jsx";
 import Education from "../cv/Education.jsx";
 import Projects from "../cv/Projects.jsx";
+import Languages from "../cv/Languages.jsx";
 
 import "../../styles/template/DeveloperTemplate.css";
+
 
 export default function DeveloperTemplate({ data }) {
 
@@ -72,6 +74,16 @@ export default function DeveloperTemplate({ data }) {
             <Section title="Education">
 
               <Education data={data}/>
+
+            </Section>
+
+          </Card>
+
+          <Card>
+
+            <Section title="Language">
+
+              <Languages data={data} />
 
             </Section>
 
