@@ -9,6 +9,7 @@ import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm";
 import SocialLinksForm from "../components/cvbuilder/SocialLinksForm";
 import SummaryForm from "../components/cvbuilder/SummaryForm";
 import SkillsForm from "../components/cvbuilder/SkillsForm";
+import ExperienceForm from "../components/cvbuilder/ExperienceForm";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -168,20 +169,7 @@ export default function CVBuilder() {
         <SummaryForm cvData={cvData}handleChange={handleChange}/>
 
         <h2>Experience</h2>
-        {cvData.experiences.map((exp, index) => (
-          <div className="experience-box" key={index}>
-            <input placeholder="Company" value={exp.company} onChange={(e) => handleNestedChange(index, "experiences", "company", e.target.value)} />
-            <input placeholder="Position" value={exp.position} onChange={(e) => handleNestedChange(index, "experiences", "position", e.target.value)} />
-            <input placeholder="Period" value={exp.period} onChange={(e) => handleNestedChange(index, "experiences", "period", e.target.value)} />
-            <textarea placeholder="Description" value={exp.description} onChange={(e) => handleNestedChange(index, "experiences", "description", e.target.value)} />
-            {cvData.experiences.length > 1 && (
-              <button type="button" className="remove-btn" onClick={() => removeItem("experiences", index)}>Delete</button>
-            )}
-          </div>
-        ))}
-        <button type="button" className="add-btn" onClick={() => addItem("experiences", { company: "", position: "", period: "", description: "" })}>
-          + Add Experience
-        </button>
+        <ExperienceForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
 
         <h2>Education</h2>
         {cvData.educations.map((edu, index) => (
