@@ -1,8 +1,10 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
+import { askAI } from "../services/aiService.js";
+import { useAuth } from "../context/authContext.jsx";
 import TemplateRenderer from "../components/templates/TemplateRenderer.jsx";
 import TemplateGallery from "../components/templates/TemplateGallery.jsx";
 import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm.jsx";
@@ -19,6 +21,7 @@ import "../styles/CVBuilder.css";
 export default function CVBuilder() {
   const cvRef = useRef();
   const { id } = useParams();
+  const { user } = useAuth();
 
   const [cvData, setCvData] = useState({
     jobTitle: "",
@@ -110,6 +113,29 @@ export default function CVBuilder() {
       alert("Failed to save CV");
     }
   };
+  const analyzeResume = async () => {
+
+  try {
+
+    const result = await askAI(
+
+      "resume-score",
+
+      cvData,
+
+      user.token
+
+    );
+
+    console.log(result);
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+};
 
   const fetchCV = async () => {
     try {
@@ -159,6 +185,7 @@ export default function CVBuilder() {
     }
   }, [id]);
 
+
   return (
     <div className="cv-container">
       <div className="cv-form">
@@ -199,6 +226,13 @@ export default function CVBuilder() {
           <button className="save-btn" onClick={saveCV}>
             Save CV
           </button>
+          <button
+    onClick={analyzeResume}
+>
+
+ Analyze Resume
+
+</button>
         </div>
       </div>
 
