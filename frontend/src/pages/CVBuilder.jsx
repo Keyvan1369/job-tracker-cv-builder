@@ -5,14 +5,15 @@ import jsPDF from "jspdf";
 import api from "../services/api";
 import TemplateRenderer from "../components/templates/TemplateRenderer.jsx";
 import TemplateGallery from "../components/templates/TemplateGallery.jsx";
-import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm";
-import SocialLinksForm from "../components/cvbuilder/SocialLinksForm";
-import SummaryForm from "../components/cvbuilder/SummaryForm";
-import SkillsForm from "../components/cvbuilder/SkillsForm";
-import ExperienceForm from "../components/cvbuilder/ExperienceForm";
-import EducationForm from "../components/cvbuilder/EducationForm";
-import ProjectsForm from "../components/cvbuilder/ProjectsForm";
-import LanguagesForm from "../components/cvbuilder/LanguagesForm";
+import PersonalInfoForm from "../components/cvbuilder/PersonalInfoForm.jsx";
+import SocialLinksForm from "../components/cvbuilder/SocialLinksForm.jsx";
+import SummaryForm from "../components/cvbuilder/SummaryForm.jsx";
+import SkillsForm from "../components/cvbuilder/SkillsForm.jsx";
+import ExperienceForm from "../components/cvbuilder/ExperienceForm.jsx";
+import EducationForm from "../components/cvbuilder/EducationForm.jsx";
+import ProjectsForm from "../components/cvbuilder/ProjectsForm.jsx";
+import LanguagesForm from "../components/cvbuilder/LanguagesForm.jsx";
+import CertificationsForm from "../components/cvbuilder/CertificationsForm.jsx";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -33,10 +34,8 @@ export default function CVBuilder() {
     experiences: [{ company: "", position: "", period: "", description: "" }],
     educations: [{ school: "", degree: "", year: "" }],
     projects: [{ name: "", technologies: "", github: "", live: "", description: "" }],
-    languages: [
-    { language: "English", level: "Fluent" }
-    ],
-    certifications: [],
+    languages: [{ language: "English", level: "Fluent" }],
+    certifications: [{name: "",issuer: "",year: ""}],
   });
 
   const [template, setTemplate] = useState("modern");
@@ -137,8 +136,8 @@ export default function CVBuilder() {
         projects: data.projects && data.projects.length > 0
           ? data.projects
           : [{ name: "", technologies: "", github: "", live: "", description: "" }],
-        languages: data.languages || [],
-        certifications: data.certifications || [],
+        languages: data.languages || [ {language: "",level: ""}],
+        certifications: data.certifications || [{name: "",issuer: "",year: ""}],
       });
 
       if (data.template) {
@@ -185,6 +184,8 @@ export default function CVBuilder() {
         <h2>Languages</h2>
         <LanguagesForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
 
+        <h2>Certifications</h2>
+        <CertificationsForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
 
         <div className="action-buttons">
           <button className="download-btn" onClick={downloadPDF}>
