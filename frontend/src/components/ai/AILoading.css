@@ -1,0 +1,43 @@
+.ai-loading{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    margin-top:20px;
+
+}
+
+.loader{
+
+    width:70px;
+
+    height:70px;
+
+    border:7px solid #ddd;
+
+    border-top:7px solid #2563eb;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
