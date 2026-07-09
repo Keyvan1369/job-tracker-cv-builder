@@ -10,7 +10,7 @@ export default function ResumeAnalysisCard({ analysis }) {
 
         <div className="resume-analysis-card">
 
-            <h2>AI Resume Analysis</h2>
+            <h2>Resume Analysis</h2>
 
             <div className="score-section">
 
