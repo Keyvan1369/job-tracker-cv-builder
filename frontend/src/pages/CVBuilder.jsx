@@ -16,6 +16,7 @@ import EducationForm from "../components/cvbuilder/EducationForm.jsx";
 import ProjectsForm from "../components/cvbuilder/ProjectsForm.jsx";
 import LanguagesForm from "../components/cvbuilder/LanguagesForm.jsx";
 import CertificationsForm from "../components/cvbuilder/CertificationsForm.jsx";
+import ResumeAnalysisCard from "../components/ai/ResumeAnalysisCard";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -65,6 +66,7 @@ export default function CVBuilder() {
     });
   };
 
+
   const addItem = (section, emptyObject) => {
     setCvData({
       ...cvData,
@@ -113,6 +115,8 @@ export default function CVBuilder() {
       alert("Failed to save CV");
     }
   };
+  const [analysis, setAnalysis] = useState(null);
+
   const analyzeResume = async () => {
 
   try {
@@ -127,7 +131,7 @@ export default function CVBuilder() {
 
     );
 
-    console.log(result);
+    setAnalysis(result);
 
   } catch (err) {
 
@@ -226,15 +230,12 @@ export default function CVBuilder() {
           <button className="save-btn" onClick={saveCV}>
             Save CV
           </button>
-          <button
-    onClick={analyzeResume}
->
-
- Analyze Resume
-
-</button>
+          <button onClick={analyzeResume}>
+            Analyze Resume
+          </button>
         </div>
       </div>
+      <ResumeAnalysisCard analysis={analysis}/>
 
       <div className="cv-preview-sidebar">
         <div className="template-selector">
