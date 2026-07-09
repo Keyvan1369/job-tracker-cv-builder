@@ -52,11 +52,10 @@ export default function CVBuilder() {
       [e.target.name]: e.target.value,
     });
   };
-  const [previewKey, setPreviewKey] = useState(0);
+
 
   const handleTemplateChange = (newTemplate) => {
   setTemplate(newTemplate);
-  setPreviewKey((prev) => prev + 1);
   };
 
   const handleNestedChange = (index, section, field, value) => {
@@ -259,7 +258,7 @@ export default function CVBuilder() {
         </div>
 
        <div
-          key={previewKey}
+
           className="cv-preview fade-preview"
           ref={cvRef}>
 
