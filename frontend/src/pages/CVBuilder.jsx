@@ -17,6 +17,7 @@ import ProjectsForm from "../components/cvbuilder/ProjectsForm.jsx";
 import LanguagesForm from "../components/cvbuilder/LanguagesForm.jsx";
 import CertificationsForm from "../components/cvbuilder/CertificationsForm.jsx";
 import ResumeAnalysisCard from "../components/ai/ResumeAnalysisCard";
+import AILoading from "../components/ai/AILoading";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -118,35 +119,30 @@ export default function CVBuilder() {
   const [analysis, setAnalysis] = useState(null);
   const [loadingAI, setLoadingAI] = useState(false);
 
-  const analyzeResume = async () => {
+ const analyzeResume = async () => {
+  try {
+    setLoadingAI(true);
 
-    try{
+    
+    await new Promise((resolve) =>
+      setTimeout(resolve, 3000)
+    );
 
-        setLoadingAI(true);
+    const result = await askAI(
+      "resume-score",
+      cvData,
+      user.token
+    );
 
-        const result = await askAI(
+    setAnalysis(result);
 
-            "resume-score",
+  } catch (err) {
+    console.error(err);
 
-            cvData,
-
-            user.token
-
-        );
-
-        setAnalysis(result);
-
-    }catch(err){
-
-        console.error(err);
-
-    }finally{
-
-        setLoadingAI(false);
-
-    }
-
+  } finally {
+    setLoadingAI(false);
   }
+};
 
 
 
@@ -244,7 +240,7 @@ export default function CVBuilder() {
           </button>
         </div>
       </div>
-      <ResumeAnalysisCard analysis={analysis}/>
+
 
       <div className="cv-preview-sidebar">
         <div className="template-selector">
@@ -271,6 +267,11 @@ export default function CVBuilder() {
             data={cvData}
           />
         </div>
+        {loadingAI ?
+          <AILoading/>
+          :
+          <ResumeAnalysisCard analysis={analysis}/>
+        }
       </div>
     </div>
   );
