@@ -1,0 +1,47 @@
+.ai-badge{
+
+    background:#f8fafc;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    margin-top:18px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+
+}
+
+.ai-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.ai-score{
+
+    font-weight:bold;
+
+}
+
+.ai-status{
+
+    font-size:.9rem;
+
+    font-weight:bold;
+
+}
+
+.ai-message{
+
+    color:#555;
+
+    line-height:1.6;
+
+}
