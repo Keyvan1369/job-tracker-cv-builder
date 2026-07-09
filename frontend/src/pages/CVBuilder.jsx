@@ -18,6 +18,7 @@ import LanguagesForm from "../components/cvbuilder/LanguagesForm.jsx";
 import CertificationsForm from "../components/cvbuilder/CertificationsForm.jsx";
 import ResumeAnalysisCard from "../components/ai/ResumeAnalysisCard";
 import AILoading from "../components/ai/AILoading";
+import PreviewOverlay from "../components/ai/PreviewOverlay";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -123,7 +124,7 @@ export default function CVBuilder() {
   try {
     setLoadingAI(true);
 
-    
+
     await new Promise((resolve) =>
       setTimeout(resolve, 3000)
     );
@@ -257,21 +258,18 @@ export default function CVBuilder() {
           <TemplateGallery template={template}onTemplateChange={handleTemplateChange}data={cvData}/>
         </div>
 
-        <div
-          key={template}
+       <div
+          key={previewKey}
           className="cv-preview fade-preview"
-          ref={cvRef}
-        >
+          ref={cvRef}>
+
+           {loadingAI && <PreviewOverlay />}
+
           <TemplateRenderer
             template={template}
-            data={cvData}
-          />
-        </div>
-        {loadingAI ?
-          <AILoading/>
-          :
+            data={cvData}/>
+      </div>
           <ResumeAnalysisCard analysis={analysis}/>
-        }
       </div>
     </div>
   );
