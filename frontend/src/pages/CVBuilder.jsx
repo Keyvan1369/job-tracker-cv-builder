@@ -116,30 +116,39 @@ export default function CVBuilder() {
     }
   };
   const [analysis, setAnalysis] = useState(null);
+  const [loadingAI, setLoadingAI] = useState(false);
 
   const analyzeResume = async () => {
 
-  try {
+    try{
 
-    const result = await askAI(
+        setLoadingAI(true);
 
-      "resume-score",
+        const result = await askAI(
 
-      cvData,
+            "resume-score",
 
-      user.token
+            cvData,
 
-    );
+            user.token
 
-    setAnalysis(result);
+        );
 
-  } catch (err) {
+        setAnalysis(result);
 
-    console.error(err);
+    }catch(err){
+
+        console.error(err);
+
+    }finally{
+
+        setLoadingAI(false);
+
+    }
 
   }
 
-};
+
 
   const fetchCV = async () => {
     try {
