@@ -1,39 +1,62 @@
 import { askAI } from "../services/ai/provider.js";
-import { resumeScorePrompt } from "../prompts/resumeScore.prompt.js";
+
+import { resumeAnalysisPrompt } from "../prompts/resumeAnalysis.prompt.js";
 
 export const aiEngine = async (req, res) => {
-  try {
-    const { action, data } = req.body;
 
-    let systemPrompt;
-    let userPrompt;
+    try {
 
-    switch (action) {
-      case "resume-score":
-        systemPrompt = resumeScorePrompt;
-        userPrompt = JSON.stringify(data, null, 2);
-        break;
+        const { action, data } = req.body;
 
-      default:
-        return res.status(400).json({
-          message: "Unknown AI action",
-        });
+        let systemPrompt = "";
+        let userPrompt = "";
+
+        switch (action) {
+
+            case "resume-score":
+
+                systemPrompt = resumeAnalysisPrompt;
+
+                userPrompt = JSON.stringify(data, null, 2);
+
+                break;
+
+            default:
+
+                return res.status(400).json({
+
+                    message: "Unknown AI action"
+
+                });
+
+        }
+
+        const response = await askAI(
+
+            systemPrompt,
+
+            userPrompt
+
+        );
+
+        res.json(
+
+            JSON.parse(response)
+
+        );
+
     }
 
-    const response = await askAI(
-      systemPrompt,
-      userPrompt
-    );
+    catch (error) {
 
-    res.json(JSON.parse(response));
+        console.error(error);
 
-  } catch (error) {
+        res.status(500).json({
 
-    console.error(error);
+            message: error.message
 
-    res.status(500).json({
-      message: error.message,
-    });
+        });
 
-  }
+    }
+
 };
