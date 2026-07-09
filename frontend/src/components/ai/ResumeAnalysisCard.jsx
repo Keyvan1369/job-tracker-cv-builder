@@ -6,6 +6,26 @@ export default function ResumeAnalysisCard({ analysis }) {
 
     const { score, strengths, weaknesses, suggestions } = analysis;
 
+    const getScoreColor = () => {
+
+        if (score >= 80) return "#16a34a";
+
+        if (score >= 60) return "#f59e0b";
+
+        return "#dc2626";
+
+    };
+
+    const getScoreLabel = () => {
+
+        if (score >= 80) return "Excellent";
+
+        if (score >= 60) return "Good";
+
+        return "Needs Improvement";
+
+    };
+
     return (
 
         <div className="resume-analysis-card">
