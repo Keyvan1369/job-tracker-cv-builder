@@ -34,15 +34,33 @@ export default function ResumeAnalysisCard({ analysis }) {
 
             <div className="score-section">
 
-                <div className="score-circle">
+    <div
+        className="score-circle"
+        style={{
+            background:getScoreColor()
+        }}
+    >
+        {score}
+    </div>
 
-                    {score}
+    <h3>Resume Score</h3>
 
-                </div>
+    <div
+        className="score-label"
+        style={{color:getScoreColor()}}>
 
-                <h3>Resume Score</h3>
+        {getScoreLabel()}
+        
+    </div>
 
-            </div>
+    <div className="progress">
+
+        <div className="progress-fill"
+            style={{width:`${score}%`,background:getScoreColor()}}/>
+
+        </div>
+
+    </div>
 
             <section>
 
