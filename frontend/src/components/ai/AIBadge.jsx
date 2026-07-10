@@ -4,62 +4,71 @@ export default function AIBadge({ analysis }) {
 
     if (!analysis) return null;
 
-    const getColor = () => {
+    const score = analysis.score ?? 0;
 
-        if (analysis.score >= 80) return "#16a34a";
+    const getStatus = () => {
 
-        if (analysis.score >= 60) return "#f59e0b";
+        if (score >= 80)
+            return {
+                color: "#22c55e",
+                label: "Excellent"
+            };
 
-        return "#dc2626";
+        if (score >= 60)
+            return {
+                color: "#f59e0b",
+                label: "Good"
+            };
+
+        return {
+            color: "#ef4444",
+            label: "Needs Improvement"
+        };
 
     };
 
-    const getLabel = () => {
-
-        if (analysis.score >= 80) return "Excellent";
-
-        if (analysis.score >= 60) return "Good";
-
-        return "Needs Improvement";
-
-    };
+    const status = getStatus();
 
     return (
 
-        <div
-            className="ai-badge"
-            style={{
-                borderLeft:`6px solid ${getColor()}`
-            }}
-        >
+        <div className="ai-badge">
 
-            <div className="ai-header">
-
-                <span
-                    className="ai-score"
-                    style={{
-                        color:getColor()
-                    }}
-                >
-                    {analysis.score}/100
-                </span>
+            <div className="ai-top">
 
                 <span
                     className="ai-status"
                     style={{
-                        color:getColor()
+                        color: status.color
                     }}
                 >
-                    {getLabel()}
+                    {status.label}
+                </span>
+
+                <span
+                    className="ai-score"
+                >
+                    {score}/100
                 </span>
 
             </div>
 
-            <div className="ai-message">
+            <div className="ai-progress">
 
-                💡 {analysis.suggestion}
+                <div
+                    className="ai-progress-fill"
+                    style={{
+                        width: `${score}%`,
+                        background: status.color
+                    }}
+                />
 
             </div>
+
+            <p className="ai-message">
+
+                 {analysis.suggestion}
+
+            </p>
 
         </div>
 
