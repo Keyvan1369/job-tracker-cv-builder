@@ -1,6 +1,7 @@
 import "./AIBadge.css";
 
-export default function AIBadge({ analysis }) {
+export default function AIBadge({ analysis, onImprove,
+    loading}) {
 
     if (!analysis) return null;
 
@@ -69,9 +70,16 @@ export default function AIBadge({ analysis }) {
                  {analysis.suggestion}
 
             </p>
-            <button className="ai-improve-btn"onClick={onImprove}>
+            <button
+                 className="ai-improve-btn"
+                onClick={onImprove}
+                disabled={loading}>
 
-                Improve
+                {
+                    loading
+                        ? "Improving..."
+                        : " Improved"
+                }
 
             </button>
 
