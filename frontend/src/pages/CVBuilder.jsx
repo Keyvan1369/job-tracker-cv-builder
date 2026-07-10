@@ -19,6 +19,7 @@ import CertificationsForm from "../components/cvbuilder/CertificationsForm.jsx";
 import ResumeAnalysisCard from "../components/ai/ResumeAnalysisCard";
 import AILoading from "../components/ai/AILoading";
 import PreviewOverlay from "../components/ai/PreviewOverlay";
+import useAIImprove from "../hooks/useAIImprove";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -118,6 +119,7 @@ export default function CVBuilder() {
   };
   const [analysis, setAnalysis] = useState(null);
   const [loadingAI, setLoadingAI] = useState(false);
+  const {improve,loading} = useAIImprove();
 
  const analyzeResume = async () => {
   try {
