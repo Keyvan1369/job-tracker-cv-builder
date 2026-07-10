@@ -1,3 +1,4 @@
+import AIBadge from "../ai/AIBadge.jsx";
 import ModernTemplate from "./ModernTemplate.jsx";
 import MinimalTemplate from "./MinimalTemplate.jsx";
 import ProfessionalTemplate from "./ProfessionalTemplate.jsx";
@@ -8,7 +9,8 @@ import DeveloperTemplate from "./DeveloperTemplate.jsx";
 
 export default function TemplateRenderer({
     template,
-    data
+    data,
+    analysis
 }) {
 
     switch(template){
@@ -31,7 +33,7 @@ export default function TemplateRenderer({
             return <DeveloperTemplate data={data} />;
 
         default:
-            return <ModernTemplate data={data}/>;
+            return <ModernTemplate data={data} analysis={analysis}/>;
 
 
 

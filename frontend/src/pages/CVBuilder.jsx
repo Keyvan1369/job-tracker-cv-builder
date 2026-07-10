@@ -266,7 +266,9 @@ export default function CVBuilder() {
 
           <TemplateRenderer
             template={template}
-            data={cvData}/>
+            data={cvData}
+            analysis={analysis}
+            />
       </div>
           <ResumeAnalysisCard analysis={analysis}/>
       </div>

@@ -1,3 +1,4 @@
+import AIBadge from "../ai/AIBadge.jsx";
 import Header from "../cv/Header.jsx";
 import Summary from "../cv/Summary.jsx";
 import Skills from "../cv/Skills.jsx";
@@ -7,7 +8,7 @@ import Projects from "../cv/Projects.jsx";
 import "../../styles/template/ModernTemplate.css";
 
 
-export default function ModernTemplate({ data }) {
+export default function ModernTemplate({ data, analysis }) {
 
   if (!data) return null;
 
@@ -31,6 +32,7 @@ export default function ModernTemplate({ data }) {
               <Education data={data} />
               <Projects data={data} />
             </main>
+            <AIBadge analysis={analysis?.summary} />
           </div>
   );
 }
