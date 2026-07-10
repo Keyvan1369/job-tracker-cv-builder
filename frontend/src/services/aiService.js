@@ -24,6 +24,29 @@ export const askAI = async (
     }
 
   );
+  export const improveSection = (
+    section,
+    text,
+    token
+    ) => {
+
+    return askAI(
+
+        "improve-section",
+
+        {
+
+            section,
+
+            text
+
+        },
+
+        token
+
+    );
+
+};
 
   return response.data;
 
