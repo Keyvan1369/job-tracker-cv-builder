@@ -1,5 +1,8 @@
+import AIBadge from "../ai/AIBadge.jsx";
+
 export default function Skills({
-    data
+    data,
+    analysis
 }) {
 
     if(!data.skills) return null;
@@ -9,6 +12,7 @@ export default function Skills({
         <>
 
             <h2>Skills</h2>
+            <AIBadge analysis={analysis}/>
 
             <div className="skills-preview">
 

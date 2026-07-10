@@ -7,7 +7,7 @@ import Projects from "../cv/Projects.jsx";
 import "../../styles/template/ModernTemplate.css";
 
 
-export default function ModernTemplate({ data }) {
+export default function ModernTemplate({ data,analysis}) {
 
   if (!data) return null;
 
@@ -24,10 +24,10 @@ export default function ModernTemplate({ data }) {
             </header>
 
             <main className="executive-body">
-              <Summary data={data} />
-              <Experience data={data} />
-              <Skills data={data} />
-              <Projects  data={data} />
+              <Summary data={data} analysis={analysis?.summary} />
+              <Experience data={data} analysis={analysis?.skills}/>
+              <Skills data={data} analysis={analysis?.skills}/>
+              <Projects  data={data} analysis={analysis?.skills}/>
               <Education data={data} />
             </main>
           </div>

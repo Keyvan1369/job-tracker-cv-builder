@@ -1,4 +1,5 @@
-export default function Summary({ data }) {
+import AIBadge from "../ai/AIBadge.jsx";
+export default function Summary({ data,analysis }) {
 
     if(!data.summary) return null;
 
@@ -7,6 +8,8 @@ export default function Summary({ data }) {
         <>
 
             <h2>Summary</h2>
+
+            <AIBadge analysis={analysis}/>
 
             <p>{data.summary}</p>
 

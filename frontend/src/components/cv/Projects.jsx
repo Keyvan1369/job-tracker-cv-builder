@@ -1,5 +1,8 @@
+import AIBadge from "../ai/AIBadge.jsx";
+
 export default function Projects({
-    data
+    data,
+    analysis
 }) {
 
     if(!data.projects?.length)
@@ -10,7 +13,7 @@ export default function Projects({
         <>
 
             <h2>Projects</h2>
-
+            <AIBadge analysis={analysis}/>
             {data.projects.map((proj,index)=>(
 
                 <div
