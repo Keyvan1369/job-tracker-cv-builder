@@ -16,21 +16,21 @@ export default function TemplateRenderer({
     switch(template){
 
         case "minimal":
-            return <MinimalTemplate data={data}/>;
+            return <MinimalTemplate data={data} analysis={analysis}/>;
 
         case "professional":
-            return <ProfessionalTemplate data={data}/>;
+            return <ProfessionalTemplate data={data} analysis={analysis}/>;
 
         case "creative":
-            return <CreativeTemplate data={data}/>;
+            return <CreativeTemplate data={data} analysis={analysis}/>;
         case "executive":
-            return <ExecutiveTemplate data={data} />;
+            return <ExecutiveTemplate data={data} analysis={analysis}/>;
 
         case "SpectrumPulse":
-            return <SpectrumPulseTemplate data={data} />;
+            return <SpectrumPulseTemplate data={data} analysis={analysis}/>;
 
         case "developer":
-            return <DeveloperTemplate data={data} />;
+            return <DeveloperTemplate data={data} analysis={analysis}/>;
 
         default:
             return <ModernTemplate data={data} analysis={analysis}/>;
