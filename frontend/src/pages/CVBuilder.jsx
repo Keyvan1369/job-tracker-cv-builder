@@ -130,6 +130,7 @@ export default function CVBuilder() {
       setTimeout(resolve, 3000)
     );
 
+
     const result = await askAI(
       "resume-score",
       cvData,
@@ -145,6 +146,29 @@ export default function CVBuilder() {
     setLoadingAI(false);
   }
 };
+  const improveSummary = async () => {
+
+    const newSummary = await improve(
+
+        "summary",
+
+        cvData.summary,
+
+        user.token
+
+    );
+
+    if (!newSummary) return;
+
+    setCvData({
+
+        ...cvData,
+
+        summary: newSummary
+
+    });
+
+  };
 
 
 
