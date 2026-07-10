@@ -2,6 +2,8 @@ import { askAI } from "../services/ai/provider.js";
 
 import { resumeAnalysisPrompt } from "../prompts/resumeAnalysis.prompt.js";
 
+import { improveSectionPrompt } from "../prompts/improveSection.prompt.js"
+
 export const aiEngine = async (req, res) => {
 
     try {
@@ -21,6 +23,24 @@ export const aiEngine = async (req, res) => {
 
                 break;
 
+            case "improve-section":
+
+                systemPrompt = improveSectionPrompt;
+
+                userPrompt = `
+                Section:
+                ${data.section}
+
+                Current text:
+                ${data.text}
+                `;
+
+                break;
+
+
+
+
+
             default:
 
                 return res.status(400).json({
@@ -38,7 +58,7 @@ export const aiEngine = async (req, res) => {
             userPrompt
 
         );
-        
+
 
         res.json(
 
