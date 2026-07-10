@@ -71,3 +71,38 @@
     line-height:1.5;
 
 }
+.ai-improve-btn{
+
+    margin-top:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.ai-improve-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.ai-improve-btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}

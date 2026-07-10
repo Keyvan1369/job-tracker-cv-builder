@@ -69,6 +69,11 @@ export default function AIBadge({ analysis }) {
                  {analysis.suggestion}
 
             </p>
+            <button className="ai-improve-btn"onClick={onImprove}>
+
+                Improve
+
+            </button>
 
         </div>
 
