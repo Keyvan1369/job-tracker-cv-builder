@@ -51,13 +51,33 @@ export const aiEngine = async (req, res) => {
 
         }
 
-        const response = await askAI(
+       const response = await askAI(
 
-            systemPrompt,
+    systemPrompt,
 
-            userPrompt
+    userPrompt
 
-        );
+);
+
+
+// برای بازنویسی متن
+if (action === "improve-section") {
+
+    return res.json({
+
+        text: response
+
+    });
+
+}
+
+
+// برای تحلیل رزومه
+return res.json(
+
+    JSON.parse(response)
+
+);
 
 
         res.json(
