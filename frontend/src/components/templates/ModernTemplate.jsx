@@ -7,7 +7,9 @@ import Projects from "../cv/Projects.jsx";
 import "../../styles/template/ModernTemplate.css";
 
 
-export default function ModernTemplate({ data,analysis}) {
+export default function ModernTemplate({ data,analysis, onImproveSummary,
+
+    loading}) {
 
   if (!data) return null;
 
@@ -24,7 +26,9 @@ export default function ModernTemplate({ data,analysis}) {
             </header>
 
             <main className="executive-body">
-              <Summary data={data} analysis={analysis?.summary} />
+              <Summary data={data} analysis={analysis?.summary} onImprove={onImproveSummary}
+
+    loading={loading} />
               <Experience data={data} analysis={analysis?.skills}/>
               <Skills data={data} analysis={analysis?.skills}/>
               <Projects  data={data} analysis={analysis?.skills}/>

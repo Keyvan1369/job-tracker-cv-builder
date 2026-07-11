@@ -10,7 +10,9 @@ import DeveloperTemplate from "./DeveloperTemplate.jsx";
 export default function TemplateRenderer({
     template,
     data,
-    analysis
+    analysis,
+    onImproveSummary,
+    loadingSummary
 }) {
 
     switch(template){
@@ -33,7 +35,9 @@ export default function TemplateRenderer({
             return <DeveloperTemplate data={data} analysis={analysis}/>;
 
         default:
-            return <ModernTemplate data={data} analysis={analysis}/>;
+            return <ModernTemplate data={data} analysis={analysis} onImproveSummary={onImproveSummary}
+
+        loadingSummary={loadingSummary}/>;
 
 
 

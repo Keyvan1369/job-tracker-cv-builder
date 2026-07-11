@@ -285,15 +285,17 @@ export default function CVBuilder() {
 
        <div
 
-          className="cv-preview fade-preview"
-          ref={cvRef}>
+           className="cv-preview fade-preview"
+           ref={cvRef}>
 
            {loadingAI && <PreviewOverlay />}
 
-          <TemplateRenderer
+           <TemplateRenderer
             template={template}
             data={cvData}
             analysis={analysis}
+            onImproveSummary={improveSummary}
+            loadingSummary={loading}
             />
       </div>
           <ResumeAnalysisCard analysis={analysis}/>
