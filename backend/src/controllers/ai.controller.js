@@ -57,27 +57,27 @@ export const aiEngine = async (req, res) => {
 
     userPrompt
 
-);
+        );
 
 
-// برای بازنویسی متن
-if (action === "improve-section") {
 
-    return res.json({
+    if (action === "improve-section") {
+
+        return res.json({
 
         text: response
 
-    });
+        });
 
-}
+    }
 
 
-// برای تحلیل رزومه
-return res.json(
 
-    JSON.parse(response)
+    return res.json(
 
-);
+        JSON.parse(response)
+
+    );
 
 
         res.json(
