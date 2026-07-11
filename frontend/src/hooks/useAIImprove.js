@@ -29,7 +29,7 @@ export default function useAIImprove() {
 
             );
 
-            return result;
+            return result.text;
 
         }
 
