@@ -4,6 +4,8 @@ import { resumeAnalysisPrompt } from "../prompts/resumeAnalysis.prompt.js";
 
 import { improveSectionPrompt } from "../prompts/improveSection.prompt.js"
 
+import { atsCheckerPrompt } from "../prompts/atsChecker.prompt.js";
+
 export const aiEngine = async (req, res) => {
 
     try {
@@ -36,6 +38,24 @@ export const aiEngine = async (req, res) => {
                 `;
 
                 break;
+
+            case "ats-checker":
+
+                systemPrompt = atsCheckerPrompt;
+
+                userPrompt = `
+
+                Resume
+
+                ${JSON.stringify(data.resume,null,2)}
+
+                Job Description
+
+                ${data.jobDescription}
+
+                `;
+
+                 break;
 
 
 
