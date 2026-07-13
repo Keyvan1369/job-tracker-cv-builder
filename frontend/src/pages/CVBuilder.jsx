@@ -146,27 +146,33 @@ export default function CVBuilder() {
     setLoadingAI(false);
   }
 };
-  const improveSummary = async () => {
+ const improveField = async (
 
-    const newSummary = await improve(
+    field,
 
-        "summary",
+    value
 
-        cvData.summary,
+  ) => {
+
+    const improved = await improve(
+
+        field,
+
+        value,
 
         user.token
 
     );
 
-    if (!newSummary) return;
+    if (!improved) return;
 
-    setCvData({
+    setCvData(prev => ({
 
-        ...cvData,
+        ...prev,
 
-        summary: newSummary
+        [field]: improved
 
-    });
+    }));
 
   };
 
@@ -294,7 +300,15 @@ export default function CVBuilder() {
             template={template}
             data={cvData}
             analysis={analysis}
-            onImproveSummary={improveSummary}
+            onImproveSummary={() =>
+
+            improveField(
+
+                "summary",
+
+                cvData.summary
+
+            )}
             loadingSummary={loading}
             />
       </div>
