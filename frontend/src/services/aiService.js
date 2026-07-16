@@ -50,3 +50,30 @@ export const improveSection = (
   );
 
 };
+export const checkATS = async (
+
+    resume,
+
+    jobDescription,
+
+    token
+
+) => {
+
+    return askAI(
+
+        "ats-checker",
+
+        {
+
+            resume,
+
+            jobDescription
+
+        },
+
+        token
+
+    );
+
+};
