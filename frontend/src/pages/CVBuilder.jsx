@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import api from "../services/api";
-import { askAI } from "../services/aiService.js";
+import { askAI, checkATS } from "../services/aiService.js";
 import { useAuth } from "../context/authContext.jsx";
 import TemplateRenderer from "../components/templates/TemplateRenderer.jsx";
 import TemplateGallery from "../components/templates/TemplateGallery.jsx";
@@ -40,9 +40,11 @@ export default function CVBuilder() {
     portfolio: "",
     experiences: [{ company: "", position: "", period: "", description: "" }],
     educations: [{ school: "", degree: "", year: "" }],
-    projects: [{ name: "", technologies: "", github: "", live: "", description: "" }],
+    projects: [
+      { name: "", technologies: "", github: "", live: "", description: "" },
+    ],
     languages: [{ language: "English", level: "Fluent" }],
-    certifications: [{name: "",issuer: "",year: ""}],
+    certifications: [{ name: "", issuer: "", year: "" }],
   });
 
   const [template, setTemplate] = useState("modern");
@@ -54,9 +56,8 @@ export default function CVBuilder() {
     });
   };
 
-
   const handleTemplateChange = (newTemplate) => {
-  setTemplate(newTemplate);
+    setTemplate(newTemplate);
   };
 
   const handleNestedChange = (index, section, field, value) => {
@@ -67,7 +68,6 @@ export default function CVBuilder() {
       [section]: updated,
     });
   };
-
 
   const addItem = (section, emptyObject) => {
     setCvData({
@@ -87,7 +87,10 @@ export default function CVBuilder() {
   const downloadPDF = async () => {
     if (!cvRef.current) return;
     try {
-      const canvas = await html2canvas(cvRef.current, { scale: 2, useCORS: true });
+      const canvas = await html2canvas(cvRef.current, {
+        scale: 2,
+        useCORS: true,
+      });
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -119,64 +122,72 @@ export default function CVBuilder() {
   };
   const [analysis, setAnalysis] = useState(null);
   const [loadingAI, setLoadingAI] = useState(false);
-  const {improve,loading} = useAIImprove();
+  const { improve, loading } = useAIImprove();
+  const [jobDescription, setJobDescription] = useState("");
+  const [atsLoading, setATSLoading] = useState(false);
+  const [atsResult, setATSResult] = useState(null);
 
- const analyzeResume = async () => {
-  try {
-    setLoadingAI(true);
+  const analyzeResume = async () => {
+    try {
+      setLoadingAI(true);
 
+      await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    await new Promise((resolve) =>
-      setTimeout(resolve, 3000)
-    );
+      const result = await askAI("resume-score", cvData, user.token);
 
-
-    const result = await askAI(
-      "resume-score",
-      cvData,
-      user.token
-    );
-
-    setAnalysis(result);
-
-  } catch (err) {
-    console.error(err);
-
-  } finally {
-    setLoadingAI(false);
-  }
-};
- const improveField = async (
-
+      setAnalysis(result);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingAI(false);
+    }
+  };
+  const improveField = async (
     field,
 
-    value
-
+    value,
   ) => {
-
     const improved = await improve(
+      field,
 
-        field,
+      value,
 
-        value,
-
-        user.token
-
+      user.token,
     );
 
     if (!improved) return;
 
-    setCvData(prev => ({
+    setCvData((prev) => ({
+      ...prev,
 
-        ...prev,
-
-        [field]: improved
-
+      [field]: improved,
     }));
-
   };
+  const analyzeATS = async () => {
+    if (!jobDescription.trim()) {
+      alert("Please paste a job description.");
 
+      return;
+    }
 
+    try {
+      setATSLoading(true);
+
+      const result = await checkATS(
+        cvData,
+
+        jobDescription,
+
+        user.token,
+      );
+
+      setATSResult(result);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setATSLoading(false);
+    }
+  };
 
   const fetchCV = async () => {
     try {
@@ -194,22 +205,35 @@ export default function CVBuilder() {
         github: data.github || "",
         linkedin: data.linkedin || "",
         portfolio: data.portfolio || "",
-        experiences: data.experiences && data.experiences.length > 0
-          ? data.experiences
-          : [{ company: "", position: "", period: "", description: "" }],
-        educations: data.educations && data.educations.length > 0
-          ? data.educations
-          : [{ school: "", degree: "", year: "" }],
-        projects: data.projects && data.projects.length > 0
-          ? data.projects
-          : [{ name: "", technologies: "", github: "", live: "", description: "" }],
-        languages: data.languages && data.languages.length > 0
-          ? data.languages
-          : [{ language: "", level: "" }],
+        experiences:
+          data.experiences && data.experiences.length > 0
+            ? data.experiences
+            : [{ company: "", position: "", period: "", description: "" }],
+        educations:
+          data.educations && data.educations.length > 0
+            ? data.educations
+            : [{ school: "", degree: "", year: "" }],
+        projects:
+          data.projects && data.projects.length > 0
+            ? data.projects
+            : [
+                {
+                  name: "",
+                  technologies: "",
+                  github: "",
+                  live: "",
+                  description: "",
+                },
+              ],
+        languages:
+          data.languages && data.languages.length > 0
+            ? data.languages
+            : [{ language: "", level: "" }],
 
-        certifications: data.certifications && data.certifications.length > 0
-        ? data.certifications
-          : [{ name: "", issuer: "", year: "" }],
+        certifications:
+          data.certifications && data.certifications.length > 0
+            ? data.certifications
+            : [{ name: "", issuer: "", year: "" }],
       });
 
       if (data.template) {
@@ -226,7 +250,6 @@ export default function CVBuilder() {
     }
   }, [id]);
 
-
   return (
     <div className="cv-container">
       <div className="cv-form">
@@ -234,31 +257,51 @@ export default function CVBuilder() {
         <p>Create your professional resume</p>
 
         <h3>Personal Information</h3>
-        <PersonalInfoForm cvData={cvData} handleChange={handleChange}/>
+        <PersonalInfoForm cvData={cvData} handleChange={handleChange} />
 
         <h3>Links & Socials</h3>
-        <SocialLinksForm cvData={cvData} handleChange={handleChange}/>
+        <SocialLinksForm cvData={cvData} handleChange={handleChange} />
 
         <h3>Skills</h3>
-        <SkillsForm cvData={cvData}handleChange={handleChange}/>
+        <SkillsForm cvData={cvData} handleChange={handleChange} />
 
         <h3>Summary</h3>
-        <SummaryForm cvData={cvData}handleChange={handleChange}/>
+        <SummaryForm cvData={cvData} handleChange={handleChange} />
 
         <h2>Experience</h2>
-        <ExperienceForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+        <ExperienceForm
+          cvData={cvData}
+          handleNestedChange={handleNestedChange}
+          addItem={addItem}
+        />
 
         <h2>Education</h2>
-       <EducationForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+        <EducationForm
+          cvData={cvData}
+          handleNestedChange={handleNestedChange}
+          addItem={addItem}
+        />
 
         <h2>Projects</h2>
-        <ProjectsForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+        <ProjectsForm
+          cvData={cvData}
+          handleNestedChange={handleNestedChange}
+          addItem={addItem}
+        />
 
         <h2>Languages</h2>
-        <LanguagesForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+        <LanguagesForm
+          cvData={cvData}
+          handleNestedChange={handleNestedChange}
+          addItem={addItem}
+        />
 
         <h2>Certifications</h2>
-        <CertificationsForm cvData={cvData}handleNestedChange={handleNestedChange}addItem={addItem}/>
+        <CertificationsForm
+          cvData={cvData}
+          handleNestedChange={handleNestedChange}
+          addItem={addItem}
+        />
 
         <div className="action-buttons">
           <button className="download-btn" onClick={downloadPDF}>
@@ -267,17 +310,35 @@ export default function CVBuilder() {
           <button className="save-btn" onClick={saveCV}>
             Save CV
           </button>
-          <button onClick={analyzeResume}>
-            Analyze Resume
-          </button>
+          <button onClick={analyzeResume}>Analyze Resume</button>
+          <div className="ats-section">
+            <h2>ATS Job Match</h2>
+
+            <textarea
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              rows={10}
+              placeholder="Paste a job description here..."
+            />
+            {atsResult && (
+              <pre className="ats-json">
+                {JSON.stringify(atsResult, null, 2)}
+              </pre>
+            )}
+            <button onClick={analyzeATS} disabled={atsLoading}>
+              {atsLoading ? "Analyzing..." : "Check ATS Match"}
+            </button>
+          </div>
         </div>
       </div>
-
 
       <div className="cv-preview-sidebar">
         <div className="template-selector">
           <label>Select Template: </label>
-          <select value={template} onChange={(e) => setTemplate(e.target.value)}>
+          <select
+            value={template}
+            onChange={(e) => setTemplate(e.target.value)}
+          >
             <option value="modern">Modern</option>
             <option value="professional">Professional</option>
             <option value="minimal">Minimal</option>
@@ -286,33 +347,31 @@ export default function CVBuilder() {
             <option value="spectrum-pulse">Spectrum Pulse</option>
             <option value="developer">Developer Neon</option>
           </select>
-          <TemplateGallery template={template}onTemplateChange={handleTemplateChange}data={cvData}/>
+          <TemplateGallery
+            template={template}
+            onTemplateChange={handleTemplateChange}
+            data={cvData}
+          />
         </div>
 
-       <div
+        <div className="cv-preview fade-preview" ref={cvRef}>
+          {loadingAI && <PreviewOverlay />}
 
-           className="cv-preview fade-preview"
-           ref={cvRef}>
-
-           {loadingAI && <PreviewOverlay />}
-
-           <TemplateRenderer
+          <TemplateRenderer
             template={template}
             data={cvData}
             analysis={analysis}
             onImproveSummary={() =>
-
-            improveField(
-
+              improveField(
                 "summary",
 
-                cvData.summary
-
-            )}
+                cvData.summary,
+              )
+            }
             loadingSummary={loading}
-            />
-      </div>
-          <ResumeAnalysisCard analysis={analysis}/>
+          />
+        </div>
+        <ResumeAnalysisCard analysis={analysis} />
       </div>
     </div>
   );
