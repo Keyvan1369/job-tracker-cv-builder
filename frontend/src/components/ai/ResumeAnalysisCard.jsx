@@ -1,123 +1,86 @@
+import ScoreCircle from "./ScoreCircle";
 import "./ResumeAnalysisCard.css";
 
 export default function ResumeAnalysisCard({ analysis }) {
+  if (!analysis) return null;
 
-    if (!analysis) return null;
+  const { score, strengths, weaknesses, suggestions } = analysis;
 
-    const { score, strengths, weaknesses, suggestions } = analysis;
+  const getScoreColor = () => {
+    if (score >= 80) return "#16a34a";
 
-    const getScoreColor = () => {
+    if (score >= 60) return "#f59e0b";
 
-        if (score >= 80) return "#16a34a";
+    return "#dc2626";
+  };
 
-        if (score >= 60) return "#f59e0b";
+  const getScoreLabel = () => {
+    if (score >= 80) return "Excellent";
 
-        return "#dc2626";
+    if (score >= 60) return "Good";
 
-    };
+    return "Needs Improvement";
+  };
 
-    const getScoreLabel = () => {
+  return (
+    <div className="resume-analysis-card">
+      <h2>Resume Analysis</h2>
 
-        if (score >= 80) return "Excellent";
-
-        if (score >= 60) return "Good";
-
-        return "Needs Improvement";
-
-    };
-
-    return (
-
-        <div className="resume-analysis-card">
-
-            <h2>Resume Analysis</h2>
-
-            <div className="score-section">
-
-    <div
-        className="score-circle"
-        style={{
-            background:getScoreColor()
-        }}
-    >
-        {score}
-    </div>
-
-    <h3>Resume Score</h3>
-
-    <div
-        className="score-label"
-        style={{color:getScoreColor()}}>
-
-        {getScoreLabel()}
-        
-    </div>
-
-    <div className="progress">
-
-        <div className="progress-fill"
-            style={{width:`${score}%`,background:getScoreColor()}}/>
-
+      <div className="score-section">
+        <div
+          className="score-circle"
+          style={{
+            background: getScoreColor(),
+          }}
+        >
+          {score}
         </div>
 
-    </div>
+        <h3>Resume Score</h3>
 
-            <section>
+        <ScoreCircle score={analysis.score} label="Resume Score" />
 
-                <h4>Strengths</h4>
-
-                <ul>
-
-                    {strengths.map((item, index) => (
-
-                        <li key={index}>
-                            {item}
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </section>
-
-            <section>
-
-                <h4>Weaknesses</h4>
-
-                <ul>
-
-                    {weaknesses.map((item, index) => (
-
-                        <li key={index}>
-                            {item}
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </section>
-
-            <section>
-
-                <h4>Suggestions</h4>
-
-                <ul>
-
-                    {suggestions.map((item, index) => (
-
-                        <li key={index}>
-                            {item}
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </section>
-
+        <div className="score-label" style={{ color: getScoreColor() }}>
+          {getScoreLabel()}
         </div>
 
-    );
+        <div className="progress">
+          <div
+            className="progress-fill"
+            style={{ width: `${score}%`, background: getScoreColor() }}
+          />
+        </div>
+      </div>
 
+      <section>
+        <h4>Strengths</h4>
+
+        <ul>
+          {strengths.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h4>Weaknesses</h4>
+
+        <ul>
+          {weaknesses.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h4>Suggestions</h4>
+
+        <ul>
+          {suggestions.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
 }
