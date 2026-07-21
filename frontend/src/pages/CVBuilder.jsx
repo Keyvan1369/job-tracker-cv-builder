@@ -20,6 +20,7 @@ import ResumeAnalysisCard from "../components/ai/ResumeAnalysisCard";
 import AILoading from "../components/ai/AILoading";
 import PreviewOverlay from "../components/ai/PreviewOverlay";
 import useAIImprove from "../hooks/useAIImprove";
+import ATSResultCard from "../components/ai/ATSResultCard";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -320,11 +321,7 @@ export default function CVBuilder() {
               rows={10}
               placeholder="Paste a job description here..."
             />
-            {atsResult && (
-              <pre className="ats-json">
-                {JSON.stringify(atsResult, null, 2)}
-              </pre>
-            )}
+            {atsResult && <ATSResultCard result={atsResult} />}
             <button onClick={analyzeATS} disabled={atsLoading}>
               {atsLoading ? "Analyzing..." : "Check ATS Match"}
             </button>
