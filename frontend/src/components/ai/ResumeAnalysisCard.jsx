@@ -1,4 +1,4 @@
-import ScoreCircle from "./ScoreCircle";
+import ScoreCard from "./ScoreCard";
 import "./ResumeAnalysisCard.css";
 
 export default function ResumeAnalysisCard({ analysis }) {
@@ -38,7 +38,7 @@ export default function ResumeAnalysisCard({ analysis }) {
 
         <h3>Resume Score</h3>
 
-        <ScoreCircle score={analysis.score} label="Resume Score" />
+        <ScoreCard title="Resume Score" score={analysis.score} />
 
         <div className="score-label" style={{ color: getScoreColor() }}>
           {getScoreLabel()}

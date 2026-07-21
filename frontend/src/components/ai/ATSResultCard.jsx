@@ -2,103 +2,51 @@ import ScoreCircle from "./ScoreCircle";
 import "../../styles/ATSResultCard.css";
 
 export default function ATSResultCard({ result }) {
+  if (!result) return null;
 
-    if (!result) return null;
+  return (
+    <div className="ats-card">
+      <ScoreCard title="ATS Match" score={result.matchScore} />
 
-    return (
+      <div className="ats-section">
+        <h3>✅ Strengths</h3>
 
-        <div className="ats-card">
+        <ul>
+          {result.strengths?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
 
-            <ScoreCircle
+      <div className="ats-section">
+        <h3>❌ Missing Skills</h3>
 
-                score={result.matchScore}
+        <ul>
+          {result.missingSkills?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
 
-                label="ATS Match"
+      <div className="ats-section">
+        <h3>🔍 Missing Keywords</h3>
 
-            />
+        <ul>
+          {result.missingKeywords?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
 
-            <div className="ats-section">
+      <div className="ats-section">
+        <h3>💡 Suggestions</h3>
 
-                <h3>✅ Strengths</h3>
-
-                <ul>
-
-                    {result.strengths?.map((item, index) => (
-
-                        <li key={index}>
-
-                            {item}
-
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </div>
-
-            <div className="ats-section">
-
-                <h3>❌ Missing Skills</h3>
-
-                <ul>
-
-                    {result.missingSkills?.map((item, index) => (
-
-                        <li key={index}>
-
-                            {item}
-
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </div>
-
-            <div className="ats-section">
-
-                <h3>🔍 Missing Keywords</h3>
-
-                <ul>
-
-                    {result.missingKeywords?.map((item, index) => (
-
-                        <li key={index}>
-
-                            {item}
-
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </div>
-
-            <div className="ats-section">
-
-                <h3>💡 Suggestions</h3>
-
-                <ul>
-
-                    {result.suggestions?.map((item, index) => (
-
-                        <li key={index}>
-
-                            {item}
-
-                        </li>
-
-                    ))}
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    );
-
+        <ul>
+          {result.suggestions?.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
