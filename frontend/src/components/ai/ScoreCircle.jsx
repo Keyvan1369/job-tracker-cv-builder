@@ -1,49 +1,37 @@
 import "./ScoreCircle.css";
 
 export default function ScoreCircle({ score = 0, label = "Score" }) {
+  const percentage = Math.max(0, Math.min(score, 100));
+  const getColor = () => {
+    if (score >= 85) return "#16a34a";
 
-    const percentage = Math.max(0, Math.min(score, 100));
+    if (score >= 70) return "#f59e0b";
 
-    return (
+    return "#ef4444";
+  };
 
-        <div className="score-circle-container">
+  return (
+    <div className="score-circle-container">
+      <div
+        className="score-circle"
+        style={{
+          background: `conic-gradient(
+             ${getColor()} ${percentage * 3.6}deg,
+                 #e5e7eb 0deg
+            )`,
+        }}
+      >
+        <span
+          className="score-number"
+          style={{
+            color: getColor(),
+          }}
+        >
+          {percentage}
+        </span>
+      </div>
 
-            <div
-                className="score-circle"
-                style={{
-                    background: `conic-gradient(
-                        #4f46e5 ${percentage * 3.6}deg,
-                        #e5e7eb 0deg
-                    )`
-                }}
-            >
-
-                <div className="score-circle-inner">
-
-                    <span className="score-number">
-
-                        {percentage}
-
-                    </span>
-
-                    <span className="score-percent">
-
-                        %
-
-                    </span>
-
-                </div>
-
-            </div>
-
-            <p className="score-label">
-
-                {label}
-
-            </p>
-
-        </div>
-
-    );
-
+      <p className="score-label">{label}</p>
+    </div>
+  );
 }
