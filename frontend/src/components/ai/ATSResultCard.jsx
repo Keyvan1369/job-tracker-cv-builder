@@ -1,4 +1,4 @@
-import ScoreCircle from "./ScoreCircle";
+import ScoreCard from "./ScoreCard";
 import "../../styles/ATSResultCard.css";
 
 export default function ATSResultCard({ result }) {
