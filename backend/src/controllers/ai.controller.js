@@ -2,34 +2,29 @@ import { askAI } from "../services/ai/provider.js";
 
 import { resumeAnalysisPrompt } from "../prompts/resumeAnalysis.prompt.js";
 
-import { improveSectionPrompt } from "../prompts/improveSection.prompt.js"
+import { improveSectionPrompt } from "../prompts/improveSection.prompt.js";
 
 import { atsCheckerPrompt } from "../prompts/atsChecker.prompt.js";
 
 export const aiEngine = async (req, res) => {
+  try {
+    const { action, data } = req.body;
 
-    try {
+    let systemPrompt = "";
+    let userPrompt = "";
 
-        const { action, data } = req.body;
+    switch (action) {
+      case "resume-score":
+        systemPrompt = resumeAnalysisPrompt;
 
-        let systemPrompt = "";
-        let userPrompt = "";
+        userPrompt = JSON.stringify(data, null, 2);
 
-        switch (action) {
+        break;
 
-            case "resume-score":
+      case "improve-section":
+        systemPrompt = improveSectionPrompt;
 
-                systemPrompt = resumeAnalysisPrompt;
-
-                userPrompt = JSON.stringify(data, null, 2);
-
-                break;
-
-            case "improve-section":
-
-                systemPrompt = improveSectionPrompt;
-
-                userPrompt = `
+        userPrompt = `
                 Section:
                 ${data.section}
 
@@ -37,17 +32,16 @@ export const aiEngine = async (req, res) => {
                 ${data.text}
                 `;
 
-                break;
+        break;
 
-            case "ats-checker":
+      case "ats-checker":
+        systemPrompt = atsCheckerPrompt;
 
-                systemPrompt = atsCheckerPrompt;
-
-                userPrompt = `
+        userPrompt = `
 
                 Resume
 
-                ${JSON.stringify(data.resume,null,2)}
+                ${JSON.stringify(data.resume, null, 2)}
 
                 Job Description
 
@@ -55,69 +49,39 @@ export const aiEngine = async (req, res) => {
 
                 `;
 
-                 break;
+        break;
 
-
-
-
-
-            default:
-
-                return res.status(400).json({
-
-                    message: "Unknown AI action"
-
-                });
-
-        }
-
-       const response = await askAI(
-
-    systemPrompt,
-
-    userPrompt
-
-        );
-
-
-
-    if (action === "improve-section") {
-
-        return res.json({
-
-        text: response
-
+      default:
+        return res.status(400).json({
+          message: "Unknown AI action",
         });
-
     }
 
+    const response = await askAI(
+      systemPrompt,
 
-
-    return res.json(
-
-        JSON.parse(response)
-
+      userPrompt,
     );
 
-
-        res.json(
-
-            JSON.parse(response)
-
-        );
-
+    if (action === "improve-section") {
+      return res.json({
+        text: response,
+      });
     }
 
-    catch (error) {
+    let cleanedResponse = response
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-        console.error(error);
+    return res.json(JSON.parse(cleanedResponse));
 
-        res.status(500).json({
+    res.json(JSON.parse(response));
+  } catch (error) {
+    console.error(error);
 
-            message: error.message
-
-        });
-
-    }
-
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };
