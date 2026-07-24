@@ -2,14 +2,8 @@ import axios from "axios";
 
 const API = import.meta.env.VITE_API_URL;
 
-export const askAI = async (
-  action,
-  data,
-  token
-) => {
-
+export const askAI = async (action, data, token) => {
   const response = await axios.post(
-
     `${API}/ai`,
 
     {
@@ -21,23 +15,14 @@ export const askAI = async (
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
-
+    },
   );
 
   return response.data;
-
 };
 
-
-export const improveSection = (
-  section,
-  text,
-  token
-) => {
-
+export const improveSection = (section, text, token) => {
   return askAI(
-
     "improve-section",
 
     {
@@ -45,35 +30,44 @@ export const improveSection = (
       text,
     },
 
-    token
-
+    token,
   );
-
 };
 export const checkATS = async (
+  resume,
 
-    resume,
+  jobDescription,
 
-    jobDescription,
-
-    token
-
+  token,
 ) => {
+  return askAI(
+    "ats-checker",
 
-    return askAI(
+    {
+      resume,
 
-        "ats-checker",
+      jobDescription,
+    },
 
-        {
+    token,
+  );
+};
+export const generateCoverLetter = (
+  resume,
 
-            resume,
+  jobDescription,
 
-            jobDescription
+  token,
+) => {
+  return askAI(
+    "cover-letter",
 
-        },
+    {
+      resume,
 
-        token
+      jobDescription,
+    },
 
-    );
-
+    token,
+  );
 };
