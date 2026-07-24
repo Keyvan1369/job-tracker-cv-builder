@@ -21,6 +21,7 @@ import AILoading from "../components/ai/AILoading";
 import PreviewOverlay from "../components/ai/PreviewOverlay";
 import useAIImprove from "../hooks/useAIImprove";
 import ATSResultCard from "../components/ai/ATSResultCard";
+import { generateCoverLetter } from "../services/aiService";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -127,6 +128,8 @@ export default function CVBuilder() {
   const [jobDescription, setJobDescription] = useState("");
   const [atsLoading, setATSLoading] = useState(false);
   const [atsResult, setATSResult] = useState(null);
+  const [coverLetter, setCoverLetter] = useState("");
+  const [coverLoading, setCoverLoading] = useState(false);
 
   const analyzeResume = async () => {
     try {
@@ -187,6 +190,31 @@ export default function CVBuilder() {
       console.error(err);
     } finally {
       setATSLoading(false);
+    }
+  };
+  const createCoverLetter = async () => {
+    if (!jobDescription.trim()) {
+      alert("Please first enter the Job Description ");
+
+      return;
+    }
+
+    try {
+      setCoverLoading(true);
+
+      const result = await generateCoverLetter(
+        cvData,
+
+        jobDescription,
+
+        user.token,
+      );
+
+      setCoverLetter(result.text);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setCoverLoading(false);
     }
   };
 
@@ -325,6 +353,21 @@ export default function CVBuilder() {
             <button onClick={analyzeATS} disabled={atsLoading}>
               {atsLoading ? "Analyzing..." : "Check ATS Match"}
             </button>
+          </div>
+          <div className="cover-letter-section">
+            <h2>AI Cover Letter Generator</h2>
+
+            <button onClick={createCoverLetter} disabled={coverLoading}>
+              {coverLoading ? "Generating..." : "Generate Cover Letter"}
+            </button>
+
+            {coverLetter && (
+              <textarea
+                rows={18}
+                value={coverLetter}
+                onChange={(e) => setCoverLetter(e.target.value)}
+              />
+            )}
           </div>
         </div>
       </div>
