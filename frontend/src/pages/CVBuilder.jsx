@@ -22,6 +22,7 @@ import PreviewOverlay from "../components/ai/PreviewOverlay";
 import useAIImprove from "../hooks/useAIImprove";
 import ATSResultCard from "../components/ai/ATSResultCard";
 import { generateCoverLetter } from "../services/aiService";
+import CoverLetterCard from "../components/ai/CoverLetterCard";
 import "../styles/CVBuilder.css";
 
 export default function CVBuilder() {
@@ -217,6 +218,11 @@ export default function CVBuilder() {
       setCoverLoading(false);
     }
   };
+  const copyCoverLetter = async () => {
+    await navigator.clipboard.writeText(coverLetter);
+
+    alert("Copied!");
+  };
 
   const fetchCV = async () => {
     try {
@@ -355,19 +361,17 @@ export default function CVBuilder() {
             </button>
           </div>
           <div className="cover-letter-section">
-            <h2>AI Cover Letter Generator</h2>
+            <h2>Cover Letter Generator</h2>
 
             <button onClick={createCoverLetter} disabled={coverLoading}>
               {coverLoading ? "Generating..." : "Generate Cover Letter"}
             </button>
 
-            {coverLetter && (
-              <textarea
-                rows={18}
-                value={coverLetter}
-                onChange={(e) => setCoverLetter(e.target.value)}
-              />
-            )}
+            <CoverLetterCard
+              text={coverLetter}
+              onCopy={copyCoverLetter}
+              onRegenerate={createCoverLetter}
+            />
           </div>
         </div>
       </div>
