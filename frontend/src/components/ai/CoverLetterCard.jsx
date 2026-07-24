@@ -18,19 +18,19 @@ export default function CoverLetterCard({
 
             <div className="cover-header">
 
-                <h2>🤖 AI Cover Letter</h2>
+                <h2>Cover Letter</h2>
 
                 <div className="cover-actions">
 
                     <button onClick={onCopy}>
 
-                        📋 Copy
+                        Copy
 
                     </button>
 
                     <button onClick={onRegenerate}>
 
-                        🔄 Regenerate
+                        Regenerate
 
                     </button>
 
