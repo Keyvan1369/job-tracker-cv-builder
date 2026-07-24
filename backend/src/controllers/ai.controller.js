@@ -6,6 +6,8 @@ import { improveSectionPrompt } from "../prompts/improveSection.prompt.js";
 
 import { atsCheckerPrompt } from "../prompts/atsChecker.prompt.js";
 
+import { coverLetterPrompt } from "../prompts/coverLetter.prompt.js";
+
 export const aiEngine = async (req, res) => {
   try {
     const { action, data } = req.body;
@@ -50,6 +52,22 @@ export const aiEngine = async (req, res) => {
                 `;
 
         break;
+      case "cover-letter":
+        systemPrompt = coverLetterPrompt;
+
+        userPrompt = `
+
+          Resume:
+
+          ${JSON.stringify(data.resume, null, 2)}
+
+          Job Description:
+
+          ${data.jobDescription}
+
+        `;
+
+        break;
 
       default:
         return res.status(400).json({
@@ -63,7 +81,7 @@ export const aiEngine = async (req, res) => {
       userPrompt,
     );
 
-    if (action === "improve-section") {
+    if (action === "improve-section" || action === "cover-letter") {
       return res.json({
         text: response,
       });
