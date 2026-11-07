@@ -4,13 +4,13 @@ An AI-powered resume builder designed to help users create professional resumes,
 
 The platform combines a modern resume-building experience with AI-powered career tools to make job applications easier and more effective.
 
-**Project Status:** 🚧 In Development
+**Project Status:**  In Development
 
 ---
 
-## ✨ Features
+##  Features
 
-### 📄 Resume Builder
+###  Resume Builder
 - Create and edit professional resumes.
 - Manage personal information and social links.
 - Add work experience, education, skills, projects, and certifications.
@@ -19,37 +19,37 @@ The platform combines a modern resume-building experience with AI-powered career
 - Export resumes as PDF.
 - Save and update resumes.
 
-### 🤖 AI Resume Analysis
+### AI Resume Analysis
 - Analyze resume quality.
 - Generate an overall resume score.
 - Identify strengths and weaknesses.
 - Receive actionable improvement suggestions.
 
-### ✍️ AI Content Improvement
+### AI Content Improvement
 - Improve resume sections using AI.
 - Rewrite professional summaries.
 - Enhance descriptions and professional wording.
 
-### 🎯 ATS Job Match Checker
+###  ATS Job Match Checker
 - Compare resumes against job descriptions.
 - Generate an ATS compatibility score.
 - Identify missing or relevant skills.
 - Provide recommendations to improve job matching.
 
-### 💌 AI Cover Letter Generator
+###  AI Cover Letter Generator
 - Generate personalized cover letters.
 - Use resume information and job descriptions.
 - Produce professional, job-specific content.
 - Copy and edit generated cover letters.
 
-### 🔐 Authentication
+###  Authentication
 - User registration and login.
 - Protected API endpoints.
 - User-specific resume management.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - React.js
@@ -82,7 +82,7 @@ The platform combines a modern resume-building experience with AI-powered career
 
 ---
 
-## 🏗️ Project Architecture
+##  Project Architecture
 
 ```text
 AI-Resume-Builder/
@@ -118,7 +118,7 @@ AI-Resume-Builder/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -192,7 +192,7 @@ Open the local URL provided by Vite in your browser.
 
 ---
 
-## 🧠 AI Workflow
+##  AI Workflow
 
 The application uses a centralized AI service architecture.
 
@@ -227,7 +227,7 @@ Supported AI actions include:
 
 ---
 
-## 🔒 Security
+## Security
 
 - JWT-based authentication.
 - Protected API routes.
@@ -237,7 +237,7 @@ Supported AI actions include:
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 The project is actively evolving.
 
@@ -261,7 +261,7 @@ The project is actively evolving.
 
 ---
 
-## 🎯 Project Goal
+## Project Goal
 
 The goal is to build a complete AI-powered career platform that helps job seekers create better resumes, optimize applications for ATS systems, and improve their chances of getting interviews.
 
@@ -269,7 +269,7 @@ The long-term vision is to turn this project into a production-ready SaaS platfo
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Keyvan Hojabr**
 
